@@ -25,35 +25,64 @@
         }
         table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate; /* Use separate to allow border-spacing */
+            border-spacing: 0; /* Remove default spacing */
             margin-top: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 0.75rem; /* Rounded corners for the table */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+            border-radius: 1rem; /* More rounded corners for the table container */
             overflow: hidden; /* Ensures rounded corners apply to content */
         }
         th, td {
-            padding: 1rem;
+            padding: 1.25rem 1.5rem; /* Increased padding for more breathing room */
             text-align: left;
-            border-bottom: 1px solid #e2e8f0; /* Light gray border */
+            /* No individual border-bottom here, rely on row styling */
         }
         th {
-            background-color: #e0f2fe; /* Lighter blue for header */
-            color: #2c5282; /* Darker blue text */
-            font-weight: 600;
+            background-color: #3b82f6; /* A more vibrant blue for header */
+            color: white; /* White text for contrast */
+            font-weight: 700; /* Bolder font weight */
             text-transform: uppercase;
-            font-size: 0.875rem;
+            font-size: 0.9rem; /* Slightly larger font */
+            letter-spacing: 0.05em; /* A bit of letter spacing */
+            border-bottom: 2px solid #2563eb; /* Stronger bottom border for header */
+        }
+        /* Specific rounded corners for header cells */
+        th:first-child {
+            border-top-left-radius: 1rem;
+        }
+        th:last-child {
+            border-top-right-radius: 1rem;
+        }
+
+        tr {
+            background-color: #ffffff; /* White background for all rows initially */
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
         tr:nth-child(even) {
-            background-color: #f8fafc; /* Slightly off-white for even rows */
+            background-color: #f8fafc; /* Subtle off-white for even rows */
         }
         tr:hover {
-            background-color: #eff6ff; /* Light blue on hover */
+            background-color: #e0f2fe; /* Lighter blue on hover */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
         }
+        td {
+            border-bottom: 1px solid #e2e8f0; /* Light gray border for cells */
+            color: #4a5568; /* Slightly darker text for content */
+        }
+        /* Remove bottom border for last row's cells */
+        tr:last-child td {
+            border-bottom: none;
+        }
+
         a {
-            color: #2563eb; /* Blue for links */
+            color: #1d4ed8; /* Darker blue for links */
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease-in-out;
         }
         a:hover {
+            color: #2563eb; /* Lighter blue on hover */
             text-decoration: underline;
         }
     </style>
@@ -890,13 +919,14 @@
                         } else if (url.startsWith('http://') || url.startsWith('https://')) {
                             try {
                                 const parsedUrl = new URL(url);
+                                // Use the display text if provided, otherwise default to hostname or full URL
                                 return `<a href="${url}" target="_blank" rel="noopener noreferrer">${display || parsedUrl.hostname}</a>`;
                             } catch (e) {
                                 console.error(`Invalid URL for ${company.name}: ${url}`, e);
                                 return display || url; // Fallback to displaying text if URL is malformed
                             }
                         } else {
-                            // Handle non-absolute URLs (e.g., relative paths, internal portal links) as plain text
+                            // For non-http/https links (e.g., relative paths, internal portal links), display as text
                             return display || url;
                         }
                     }
