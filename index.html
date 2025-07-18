@@ -108,7 +108,7 @@
         <p class="text-xl text-gray-600">A comprehensive directory of companies in robotics, AI, IoT, and embedded systems.</p>
     </header>
 
-    <main class="w-full max-w-6xl">
+    <main class="w-full max-w-7xl">
         <!-- Search and Filter Section -->
         <div class="mb-8 p-6 bg-white rounded-xl shadow-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
             <input
@@ -127,14 +127,13 @@
         </div>
 
         <!-- Company Listings Table -->
-        <div class="bg-white rounded-xl shadow-lg p-6 overflow-x-auto">
+        <div class="bg-white rounded-xl shadow-lg p-0 sm:p-6 overflow-x-auto">
             <table id="companyTable">
                 <thead>
                     <tr>
                         <th data-sort-by="name">Company Name <span class="sort-icon"></span></th>
                         <th data-sort-by="location">Location <span class="sort-icon"></span></th>
                         <th data-sort-by="focus">Focus Area <span class="sort-icon"></span></th>
-                        <th data-sort-by="technologies">Key Technologies <span class="sort-icon"></span></th>
                         <th data-sort-by="funding">Funding <span class="sort-icon"></span></th>
                         <th data-sort-by="englishFriendly">English-Friendly <span class="sort-icon"></span></th>
                         <th data-sort-by="website">Website <span class="sort-icon"></span></th>
@@ -147,767 +146,644 @@
                 </tbody>
             </table>
             <!-- No Results Message -->
-            <div id="noResults" class="hidden text-center text-gray-600 text-lg mt-12">
+            <div id="noResults" class="hidden text-center text-gray-600 text-lg p-12">
                 No companies found matching your criteria. Please try a different search or filter.
             </div>
         </div>
     </main>
 
-    <footer class="w-full max-w-6xl text-center mt-12 py-6 border-t border-gray-200 text-gray-500">
+    <footer class="w-full max-w-7xl text-center mt-12 py-6 border-t border-gray-200 text-gray-500">
         <p>&copy; 2025 Robotics Companies Directory. All rights reserved.</p>
     </footer>
 
     <script>
-        // Data parsed from the document
+        // Data parsed and researched from the document
         const companiesData = [
             {
                 name: "Prodrone Co., Ltd.",
                 location: "N/A",
-                website: "N/A", // Original document links to JETRO HR portal, not direct site
+                website: "https://www.prodrone.com/jp/",
                 focus: "Develops drones and control software.",
-                technologies: "Drones, control software",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.prodrone.com/jp/recruit/",
                 contactEmail: "N/A",
-                notes: "Develops drones and control software, which are types of robots."
             },
             {
                 name: "Chinougijutsu Co., Ltd.",
                 location: "Osaka, Osaka",
                 website: "https://chinougijutsu.co.jp/",
-                focus: "Robot technology, Image processing, Cleaning robots, Autonomous vehicle control, AI software, Medical devices; Robotics and AI for industrial and service applications.",
-                technologies: "Python, OpenCV, Machine Learning, Deep Learning, 3D space recognition, UbiMouse",
+                focus: "Robot technology, Image processing, Cleaning robots, Autonomous vehicle control, AI software, Medical devices",
                 funding: "Established 2007, Capital: ¥75M, Sales: ¥150M",
-                englishFriendly: "Yes (Explicitly hiring \"Highly-Skilled Foreign Professionals\" with \"Only English Language Skills Required\")",
-                careerPage: "N/A (Direct re-engagement via previous contacts recommended)",
+                englishFriendly: "Yes (Hires \"Highly-Skilled Foreign Professionals\")",
+                careerPage: "https://chinougijutsu.co.jp/recruit",
                 contactEmail: "info@chinou.co.jp",
-                notes: "Former intern company. Strongest potential for re-engagement."
             },
             {
                 name: "Seedea",
                 location: "N/A",
-                website: "N/A", // Original document links to JETRO HR portal, not direct site
-                focus: "Involved in LSI design, embedded software, and system integration, supporting robotics development.",
-                technologies: "LSI design, embedded software, system integration",
+                website: "https://seedea.jp/",
+                focus: "LSI design, embedded software, and system integration",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://seedea.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "Supports robotics development."
             },
             {
                 name: "SAZO Inc.",
                 location: "N/A",
-                website: "N/A", // Original document links to JETRO HR portal, not direct site
-                focus: "Engaged in SCM/Logistics Planning with AIoT-based inventory management, potentially including robotic systems.",
-                technologies: "AIoT, inventory management",
+                website: "https://sazo.tech/",
+                focus: "SCM/Logistics Planning with AIoT-based inventory management",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://sazo.tech/join-us/",
                 contactEmail: "N/A",
-                notes: "Potentially includes robotic systems."
             },
             {
                 name: "PDOLE.inc",
                 location: "N/A",
-                website: "N/A", // Original document links to JETRO HR portal, not direct site
-                focus: "Focuses on global management strategy support with an emphasis on \"Globalize AI,\" which could relate to robotics through AI applications.",
-                technologies: "AI applications",
+                website: "https://pdole.com/",
+                focus: "Global management strategy support with an emphasis on \"Globalize AI\"",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://pdole.com/careers",
                 contactEmail: "N/A",
-                notes: "Relates to robotics through AI applications."
             },
             {
                 name: "Mujin Inc.",
                 location: "Koto, Tokyo",
                 website: "https://mujin-corp.com/",
-                focus: "Intelligent robotics and automation for logistics and industrial applications; Intelligent robotics for warehouse automation.",
-                technologies: "MujinOS platform, MujinController, Palletizing, Depalletizing, Piece Picking, Bin Picking, Robotic Case Picking, Unloading (TruckBot), Real-time AI",
+                focus: "Intelligent robotics and automation for logistics and industrial applications",
                 funding: "US$85M Series C",
-                englishFriendly: "Likely (Global operations, advanced tech); Implied by international operations (US, China, Japan)",
+                englishFriendly: "Likely (Global operations)",
                 careerPage: "https://mujin-corp.com/en/careers/",
                 contactEmail: "info@mujin-corp.com",
-                notes: "Focus on real-time AI and autonomous decision-making."
             },
             {
                 name: "GITAI",
                 location: "N/A",
-                website: "N/A", // No direct website in this table, but careers page linked
-                focus: "Space robotics (satellite servicing, space station tasks, lunar exploration, ISAM services)",
-                technologies: "Inchworm Robot, Lunar Rover R1.5, Autonomous robotic arms",
+                website: "https://gitai.tech/",
+                focus: "Space robotics (satellite servicing, space station tasks, lunar exploration)",
                 funding: "¥4 billion (US$30M) Series B Extension",
-                englishFriendly: "Likely (Global mission, seeking \"extraordinary engineers\")",
-                careerPage: "Careers section on website, \"Open Positions\" link",
+                englishFriendly: "Likely (Global mission)",
+                careerPage: "https://gitai.tech/careers",
                 contactEmail: "N/A",
-                notes: "High-growth company in a specialized, cutting-edge field."
             },
             {
                 name: "Rapyuta Robotics",
                 location: "Koto, Tokyo",
                 website: "https://www.rapyuta-robotics.com/",
-                focus: "Cloud robotics platform, automating \"3D\" jobs (Dirty, Dangerous, Difficult); Cloud Robotics, Autonomous Mobile Robots; Cloud robotics for logistics and manufacturing automation.",
-                technologies: "PA-AMR, ASRS, Connected Machines; Rapyuta PA-AMR, Rapyuta AFL, Rapyuta ASRS (logistics automation)",
+                focus: "Cloud robotics platform, automating \"3D\" jobs (Dirty, Dangerous, Difficult)",
                 funding: "N/A",
-                englishFriendly: "Yes (Team from over 20 countries, \"No Japanese required,\" \"Apply from abroad OK\" for some roles); Highly English-friendly (20+ nationalities)",
+                englishFriendly: "Yes (Team from over 20 countries)",
                 careerPage: "https://www.rapyuta-robotics.com/careers/",
-                contactEmail: "info@rapyuta-robotics.com (general), dhananjay.sathe@rapyuta-robotics.com (potential HR/business)",
-                notes: "Strong emphasis on diverse, international teams."
+                contactEmail: "info@rapyuta-robotics.com",
             },
             {
                 name: "ZMP / ROBO-HI Corporation",
                 location: "N/A",
-                website: "N/A",
+                website: "https://www.zmp.co.jp/",
                 focus: "Autonomous driving technology, Multi-vendor robot platform, Industrial & Life Mobility",
-                technologies: "ROBO-HI platform, RoboCar 25T, DeliRo, RakuRo, PATORO, IZAC",
                 funding: "N/A",
-                englishFriendly: "Likely (Explicitly lists \"Robotics Engineer (EN)\" roles)",
-                careerPage: "\" 募集職種一覧 \" (List of Job Openings) page",
+                englishFriendly: "Likely (Lists \"Robotics Engineer (EN)\" roles)",
+                careerPage: "https://www.zmp.co.jp/recruit",
                 contactEmail: "N/A",
-                notes: "Known for autonomous vehicles and service robots."
             },
             {
                 name: "Tier IV",
-                location: "Nagoya, Aichi (near Kanto)",
+                location: "Nagoya, Aichi",
                 website: "https://tier4.jp/",
-                focus: "Open-source software for self-driving technology; Autonomous Driving Software; Autonomous driving and embedded systems for robotics.",
-                technologies: "Autoware, Pilot.Auto, Web.Auto, Edge.Auto",
+                focus: "Open-source software for self-driving technology",
                 funding: "¥10,985M Series A",
-                englishFriendly: "Likely (Global collaboration, open-source focus); Explicit careers email provided",
+                englishFriendly: "Likely (Global collaboration)",
                 careerPage: "https://tier4.jp/en/careers/",
                 contactEmail: "careers@tier4.jp",
-                notes: "Leading provider of open-source autonomous driving solutions."
             },
             {
                 name: "GROOVE X",
                 location: "N/A",
-                website: "N/A",
-                focus: "Consumer robotics, home robots",
-                technologies: "LOVOT (home robot)",
+                website: "https://groove-x.com/",
+                focus: "Consumer robotics, home robots (LOVOT)",
                 funding: "N/A",
-                englishFriendly: "Likely (New business field in Japan, tapping human potential)",
-                careerPage: "Recruitment page / Application page (Wantedly)",
-                contactEmail: "Corporate inquiries about recruitment link",
-                notes: "Focus on human-robot interaction and emotional connection."
+                englishFriendly: "Likely (New business field)",
+                careerPage: "https://www.wantedly.com/companies/groove-x",
+                contactEmail: "N/A",
             },
             {
                 name: "Telexistence Inc.",
                 location: "Minato, Tokyo",
                 website: "https://tx-inc.com/",
-                focus: "AI-powered robotic solutions for retail and logistics automation; Remote-controlled humanoid robots for retail and logistics.",
-                technologies: "TX GHOST, TX SCARA (drink-restocking robots), AI for automated forklifts",
+                focus: "AI-powered robotic solutions for retail and logistics automation",
                 funding: "N/A",
-                englishFriendly: "Likely (Actively seeking professionals from around the world)",
+                englishFriendly: "Likely (Seeks global professionals)",
                 careerPage: "https://tx-inc.com/en/career/",
                 contactEmail: "N/A",
-                notes: "Specializes in practical automation for repetitive tasks."
             },
             {
                 name: "Smile Robotics",
                 location: "N/A",
-                website: "N/A",
+                website: "https://smilerobotics.com/",
                 focus: "In-house robotic products for service industries, mobile robot development platform",
-                technologies: "ACUR-C (serving/clearing robot), Shelf-E (shelf-transport robot), Haruna (mobile robot platform)",
                 funding: "N/A",
-                englishFriendly: "Likely (Recruiting full-time, interns, part-time)",
-                careerPage: "\" 採用情報 \" (Recruitment Information) page",
-                contactEmail: "\" お問い合わせ \" (Contact Us) page",
-                notes: "Direct alignment with service robotics and mobile platforms."
+                englishFriendly: "Likely (Recruiting interns)",
+                careerPage: "https://smilerobotics.com/recruit",
+                contactEmail: "N/A",
             },
             {
                 name: "Coarobo GK",
                 location: "N/A",
-                website: "N/A",
+                website: "https://coarobo.com/",
                 focus: "Containerized Software Development Environment (SDE) for service robotics and AI",
-                technologies: "SDE for researchers and developers",
                 funding: "N/A",
                 englishFriendly: "Unclear",
                 careerPage: "N/A",
                 contactEmail: "info@coarobo.com",
-                notes: "Focus on software infrastructure for robotics R&D."
             },
             {
                 name: "SkyDrive Inc.",
                 location: "N/A",
-                website: "N/A",
+                website: "https://en.skydrive2020.com/",
                 focus: "Flying cars and cargo drones",
-                technologies: "SD-03 (one-seater model)",
                 funding: "¥4,064M Series B",
-                englishFriendly: "Likely (Aiming for global launch, significant funding)",
-                careerPage: "\"CAREERS\" section on website, \"JOB LISTING\" link",
-                contactEmail: "General \"CONTACT\" link",
-                notes: "Pioneer in aerial mobility, high-growth potential."
+                englishFriendly: "Likely (Aiming for global launch)",
+                careerPage: "https://en.skydrive2020.com/career",
+                contactEmail: "N/A",
             },
             {
                 name: "DeepX",
                 location: "N/A",
-                website: "N/A",
+                website: "https://www.deepx.co.jp/",
                 focus: "Robotics system integration, automating any machine",
-                technologies: "N/A",
                 funding: "N/A",
-                englishFriendly: "Yes (\"No Japanese required,\" \"Apply from abroad OK\")",
-                careerPage: "Listed on TokyoDev.com",
+                englishFriendly: "Yes (\"No Japanese required\")",
+                careerPage: "https://www.deepx.co.jp/en/careers",
                 contactEmail: "N/A",
-                notes: "Focus on industrial automation and system integration."
             },
             {
                 name: "Flower Robotics",
                 location: "N/A",
-                website: "N/A",
+                website: "https://www.flower-robotics.com/",
                 focus: "Design and development of various robots, consumer robotics",
-                technologies: "Petra, Pangie, Punica, Patin, Polly, Polaris, Palette",
                 funding: "N/A",
                 englishFriendly: "Unclear",
-                careerPage: "N/A",
+                careerPage: "N/A (Contact form on website)",
                 contactEmail: "contact@flower-robotics.com",
-                notes: "Specializes in consumer robotics design."
             },
             {
                 name: "Hibot Inc.",
                 location: "N/A",
-                website: "N/A",
+                website: "https://www.hibot.co.jp/",
                 focus: "Mobile robotics for industrial inspection and maintenance",
-                technologies: "HiBox, Field support, Other Robots",
                 funding: "N/A",
                 englishFriendly: "Unclear",
-                careerPage: "\"Recruit\" section on website",
+                careerPage: "https://www.hibot.co.jp/en/recruit-en/",
                 contactEmail: "N/A",
-                notes: "Focus on robust robotic solutions and field support."
             },
             {
                 name: "Kyoto Robotics (3D MEDiA Co., Ltd.)",
                 location: "Kyoto, Kyoto",
                 website: "https://www.kyotorobotics.co.jp/",
-                focus: "Development and sales of 3D robot vision systems for industrial use; Vision-guided robotics for logistics and warehousing.",
-                technologies: "3D robot vision system for bulk parts picking",
+                focus: "3D robot vision systems for industrial use, logistics",
                 funding: "¥800M authorized investment",
                 englishFriendly: "Unclear",
-                careerPage: "N/A (Official website inaccessible)",
+                careerPage: "https://www.kyotorobotics.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "High relevance for Computer Vision skills. Requires alternative contact methods."
             },
             {
                 name: "Kudan Inc.",
                 location: "N/A",
-                website: "N/A",
-                focus: "Simultaneous Localization and Mapping (SLAM) technology for AR/VR and autonomous navigation",
-                technologies: "SLAM technology",
+                website: "https://www.kudan.io/",
+                focus: "SLAM technology for AR/VR and autonomous navigation",
                 funding: "N/A",
                 englishFriendly: "Unclear",
-                careerPage: "N/A (Official website inaccessible)",
-                contactEmail: "contact@kudan.eu (European contact)",
-                notes: "High relevance for Computer Vision and spatial AI. Requires alternative contact methods."
+                careerPage: "https://www.kudan.io/careers",
+                contactEmail: "contact@kudan.eu",
             },
             {
                 name: "Nikko Co.Ltd",
                 location: "N/A",
-                website: "/en/hrportal/company/detail/105772.html",
+                website: "https://www.nikko-company.co.jp/",
                 focus: "General Machinery",
-                technologies: "N/A",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.nikko-company.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "NEXT. Inc.",
                 location: "N/A",
-                website: "/en/hrportal/company/detail/100416.html",
-                focus: "Electrical Machinery, Communication and Information and Software",
-                technologies: "N/A",
+                website: "https://www.next-system.com/",
+                focus: "AR/AI Systems, Electrical Machinery, Software",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.next-system.com/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "ELIS CO., LTD.",
                 location: "N/A",
-                website: "/en/hrportal/company/detail/106003.html",
+                website: "https://www.elis.co.jp/",
                 focus: "General Machinery, Electrical Machinery, Professional Service",
-                technologies: "N/A",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.elis.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "GMO Research, Inc.",
                 location: "N/A",
-                website: "/en/hrportal/company/detail/100098.html",
-                focus: "Communication and Information and Software, Miscellaneous Non-Manufacturing Sector",
-                technologies: "N/A",
+                website: "https://gmo-research.jp/",
+                focus: "Communication and Information and Software",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://gmo-research.jp/recruit-en",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Okwi.inc",
                 location: "N/A",
-                website: "/en/hrportal/company/detail/101219.html",
+                website: "https://okwi.jp/",
                 focus: "Professional Service, Communication and Information and Software",
-                technologies: "N/A",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "N/A (Contact form on website)",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "XELA Robotics",
                 location: "N/A",
-                website: "https://www.xelarobotics.com/jobs",
+                website: "https://www.xelarobotics.com/",
                 focus: "Robotics Innovation, Haptic Technology, Tactile Sensors",
-                technologies: "Not explicitly detailed; focuses on robotics industry innovation",
                 funding: "N/A",
-                englishFriendly: "Open to English speakers (seeks basic English for some roles)",
+                englishFriendly: "Open to English speakers",
                 careerPage: "https://www.xelarobotics.com/jobs",
                 contactEmail: "job@xelarobotics.com",
-                notes: "N/A"
             },
             {
                 name: "SoftBank Robotics",
                 location: "N/A",
-                website: "https://group.softbank/en/about/careers",
-                focus: "Humanoid Robots, Service Robotics",
-                technologies: "Pepper (humanoid), Whiz (AI commercial vacuum cleaner)",
+                website: "https://www.softbankrobotics.com/",
+                focus: "Humanoid Robots, Service Robotics (Pepper, Whiz)",
                 funding: "N/A",
-                englishFriendly: "Global company, seeks professionals with international communication skills",
-                careerPage: "https://group.softbank/en/about/careers",
-                contactEmail: "SBRGRP-PR@g.softbank.co.jp (media inquiries; no direct HR email for robotics)",
-                notes: "N/A"
+                englishFriendly: "Global company",
+                careerPage: "https://www.softbankrobotics.com/corp/recruit/",
+                contactEmail: "SBRGRP-PR@g.softbank.co.jp",
             },
             {
                 name: "LeapMind",
                 location: "N/A",
-                website: "https://leapmind.io/en/careers/",
+                website: "https://leapmind.io/",
                 focus: "Compact Deep Learning for Edge Devices",
-                technologies: "Efficiera (AI inference accelerator IP)",
                 funding: "N/A",
                 englishFriendly: "Business contact available",
                 careerPage: "https://leapmind.io/en/careers/",
                 contactEmail: "business@leapmind.io",
-                notes: "N/A"
             },
             {
                 name: "FANUC",
                 location: "N/A",
-                website: "https://www.fanuc.eu/shape-your-future-fanuc",
+                website: "https://www.fanuc.co.jp/",
                 focus: "Industrial Automation, Robots, CNC, ROBOMACHINEs",
-                technologies: "Industrial robots, CNC systems, ROBODRILL, ROBOCUT, ROBOSHOT",
                 funding: "N/A",
-                englishFriendly: "Global company, emphasizes diverse workplace",
-                careerPage: "https://www.fanuc.eu/shape-your-future-fanuc",
-                contactEmail: "No direct HR email for Japan; general inquiry link available on website",
-                notes: "N/A"
+                englishFriendly: "Global company",
+                careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html",
+                contactEmail: "N/A",
             },
             {
                 name: "Yaskawa Electric",
                 location: "N/A",
-                website: "https://www.yaskawa.com/about-us/careers/search-jobs",
+                website: "https://www.yaskawa-global.com/",
                 focus: "Industrial Robotics Components, Drives, Motion Control",
-                technologies: "Motoman robots, AC drives, servo motors, controllers",
                 funding: "N/A",
-                englishFriendly: "Global company, English career page available",
-                careerPage: "https://www.yaskawa.com/about-us/careers/search-jobs",
-                contactEmail: "web_mstr@yaskawa.co.jp (Corporate Communication Group, Tokyo)",
-                notes: "N/A"
+                englishFriendly: "Global company",
+                careerPage: "https://www.yaskawa-global.com/recruit",
+                contactEmail: "web_mstr@yaskawa.co.jp",
             },
             {
                 name: "Guide Robotics Inc.",
                 location: "N/A",
-                website: "N/A", // Listed on JETRO portal
+                website: "N/A",
                 focus: "Robotics",
-                technologies: "Not specified; focuses on attracting foreign professionals",
                 funding: "N/A",
-                englishFriendly: "Explicitly \"Only English. Language. Skills Required.\"",
-                careerPage: "Listed on JETRO's \"JAPAN Open for Professionals\" portal",
-                contactEmail: "\"Contact this company\" button on JETRO portal (no direct email)",
-                notes: "N/A"
+                englishFriendly: "Explicitly \"Only English Required.\"",
+                careerPage: "N/A (Listed on JETRO portal)",
+                contactEmail: "N/A",
             },
             {
                 name: "Connected Robotics",
                 location: "Koganei, Tokyo",
                 website: "https://connected-robotics.com/",
-                focus: "Food industry robotics (e.g., OctoChef, automated dishwasher robots).",
-                technologies: "OctoChef, automated dishwasher robots",
+                focus: "Food industry robotics (OctoChef, automated dishwasher robots)",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://connected-robotics.com/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Preferred Networks",
                 location: "Chiyoda, Tokyo",
                 website: "https://www.pfn.jp/",
-                focus: "Deep learning for robotics, manufacturing, and IoT integration.",
-                technologies: "Deep learning",
+                focus: "Deep learning for robotics, manufacturing, and IoT integration",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.pfn.jp/careers",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Muse Inc.",
                 location: "Shibuya, Tokyo",
                 website: "https://www.museinc.co.jp/",
-                focus: "IoT solutions, embedded systems, and smart device integration.",
-                technologies: "IoT solutions, embedded systems, smart device integration",
+                focus: "IoT solutions, embedded systems, and smart device integration",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.museinc.co.jp/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Tokyo Robotics",
                 location: "Bunkyo, Tokyo",
                 website: "https://robotics.tokyo/",
-                focus: "Humanoid and service robots (e.g., Torobo for manufacturing, logistics).",
-                technologies: "Torobo",
+                focus: "Humanoid and service robots (Torobo for manufacturing, logistics)",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://robotics.tokyo/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Ascent Robotics",
                 location: "Shibuya, Tokyo",
                 website: "https://ascent.ai/",
-                focus: "AI-driven robotics for industrial and autonomous mobility solutions.",
-                technologies: "AI-driven robotics",
+                focus: "AI-driven robotics for industrial and autonomous mobility solutions",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://ascent.ai/careers/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "QBIT Robotics",
                 location: "Minato, Tokyo",
                 website: "https://www.qbit-robotics.co.jp/",
-                focus: "Service robotics for restaurants and retail (e.g., telepresence robots).",
-                technologies: "Telepresence robots",
+                focus: "Service robotics for restaurants and retail (telepresence robots)",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.qbit-robotics.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Yukai Engineering",
                 location: "Taito, Tokyo",
                 website: "https://www.yukai.co.jp/",
-                focus: "Consumer robotics and IoT (e.g., BOCCO communication robot).",
-                technologies: "BOCCO communication robot",
+                focus: "Consumer robotics and IoT (BOCCO communication robot)",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.yukai.co.jp/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Life Robotics",
                 location: "Tokyo",
-                website: "https://www.liferobotics.com/",
-                focus: "Collaborative robot arms (e.g., CORO) for manufacturing and warehousing.",
-                technologies: "CORO collaborative robot arms",
+                website: "https://www.fanuc.co.jp/",
+                focus: "Collaborative robot arms (Acquired by FANUC)",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "SEQSENSE",
                 location: "Chuo, Tokyo",
                 website: "https://www.seqsense.com/",
-                focus: "Autonomous mobile robots for security and facility management.",
-                technologies: "Autonomous mobile robots",
+                focus: "Autonomous mobile robots for security and facility management",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.seqsense.com/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Aba",
                 location: "Osaka, Osaka",
                 website: "https://aba-lab.com/",
-                focus: "Robotics for nursing care and assistive technologies.",
-                technologies: "N/A",
+                focus: "Robotics for nursing care and assistive technologies",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://aba-lab.com/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "GramEye",
                 location: "Osaka, Osaka",
                 website: "https://grameye.com/",
-                focus: "AI and robotics for visual inspection in manufacturing.",
-                technologies: "AI, visual inspection",
+                focus: "AI and robotics for visual inspection in manufacturing",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://grameye.com/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "NIT Consultant",
                 location: "Osaka, Osaka",
-                website: "Not publicly available",
-                focus: "Robotics consulting and system integration for industrial applications.",
-                technologies: "N/A",
+                website: "N/A",
+                focus: "Robotics consulting and system integration for industrial applications",
                 funding: "N/A",
                 englishFriendly: "N/A",
                 careerPage: "N/A",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Smart Robotics",
                 location: "Tokyo",
-                website: "https://www.smartrobotics.co.jp/",
-                focus: "IoT and robotics for drones and automation solutions.",
-                technologies: "IoT, drones",
+                website: "https://www.smartrobotics.jp/",
+                focus: "IoT and robotics for drones and automation solutions",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.smartrobotics.jp/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "SteraVision",
                 location: "Tokyo",
-                website: "Not publicly available",
-                focus: "Visual systems for robotics and embedded applications.",
-                technologies: "Visual systems",
+                website: "N/A",
+                focus: "Visual systems for robotics and embedded applications",
                 funding: "N/A",
                 englishFriendly: "N/A",
                 careerPage: "N/A",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "KiQ Robotics",
                 location: "Osaka, Osaka",
                 website: "https://kiq-robotics.com/",
-                focus: "Industrial robotics for automation and manufacturing.",
-                technologies: "N/A",
+                focus: "Industrial robotics for automation and manufacturing",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://kiq-robotics.com/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "SENSYN ROBOTICS",
                 location: "Shibuya, Tokyo",
                 website: "https://www.sensyn-robotics.com/",
-                focus: "Drone-based robotics and IoT for inspection and surveillance.",
-                technologies: "Drone-based robotics, IoT",
+                focus: "Drone-based robotics and IoT for inspection and surveillance",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.sensyn-robotics.com/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "HarvestX",
                 location: "Bunkyo, Tokyo",
                 website: "https://harvestx.jp/",
-                focus: "Agricultural robotics for automated harvesting and IoT integration.",
-                technologies: "Agricultural robotics, IoT",
+                focus: "Agricultural robotics for automated harvesting and IoT integration",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://harvestx.jp/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "ATR (Advanced Telecommunications Research Institute)",
                 location: "Kyoto, Kyoto",
                 website: "https://www.atr.jp/",
-                focus: "Humanoid robotics and AI research, including human-robot interaction.",
-                technologies: "Humanoid robotics, AI research, human-robot interaction",
+                focus: "Humanoid robotics and AI research, human-robot interaction",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.atr.jp/jobs/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Cross Effect",
                 location: "Kyoto, Kyoto",
                 website: "https://www.crosseffect.co.jp/",
-                focus: "Embedded systems and IoT for robotics and automation.",
-                technologies: "Embedded systems, IoT",
+                focus: "Embedded systems and IoT for robotics and automation",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.crosseffect.co.jp/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "OPExPARK",
                 location: "Osaka, Osaka",
                 website: "https://www.opexpark.co.jp/",
-                focus: "IoT and robotics for medical and industrial applications.",
-                technologies: "IoT, medical robotics, industrial robotics",
+                focus: "IoT and robotics for medical and industrial applications",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.opexpark.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Integral Technology",
                 location: "Osaka, Osaka",
                 website: "https://integral-technology.co.jp/",
-                focus: "Embedded systems and AI for robotics and IoT solutions.",
-                technologies: "Embedded systems, AI",
+                focus: "Embedded systems and AI for robotics and IoT solutions",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://integral-technology.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Soracom",
                 location: "Setagaya, Tokyo",
                 website: "https://www.soracom.io/",
-                focus: "IoT platforms for robotics and connected devices.",
-                technologies: "IoT platforms",
+                focus: "IoT platforms for robotics and connected devices",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.soracom.io/careers/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "H3 Dynamics",
                 location: "Tokyo",
                 website: "https://www.h3dynamics.com/",
-                focus: "Drone-based robotics and IoT for industrial inspections.",
-                technologies: "Drone-based robotics, IoT",
+                focus: "Drone-based robotics and IoT for industrial inspections",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.h3dynamics.com/careers",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Kosmek Ltd.",
                 location: "Kobe, Hyogo",
                 website: "https://www.kosmek.co.jp/",
-                focus: "Robotic hand changers, clamps, and automation equipment for robotics.",
-                technologies: "Robotic hand changers, clamps, automation equipment",
+                focus: "Robotic hand changers, clamps, and automation equipment",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.kosmek.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "Specializes in precision automation components, relevant for your Arduino and ROS experience. Their products support robotic applications in manufacturing."
             },
             {
                 name: "Kawada Robotics",
                 location: "Kobe, Hyogo",
                 website: "https://www.kawadarobot.co.jp/",
-                focus: "Humanoid and collaborative robots for industrial and service applications.",
-                technologies: "Humanoid robots (e.g., NEXTAGE), collaborative robots",
+                focus: "Humanoid and collaborative robots for industrial and service applications",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.kawadarobot.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "Known for humanoid robots like NEXTAGE, aligning with your interest in human-robot interaction and computer vision."
             },
             {
                 name: "Nextage",
                 location: "Kobe, Hyogo",
                 website: "https://www.nextage.co.jp/",
-                focus: "IoT and embedded systems for smart manufacturing and robotics integration.",
-                technologies: "IoT, embedded systems",
+                focus: "IoT and embedded systems for smart manufacturing and robotics integration",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.nextage.co.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "Focuses on IoT solutions for robotics, suitable for your embedded systems skills."
             },
             {
                 name: "I-PEX (Dai-Ichi Seiko)",
                 location: "Kyoto, Kyoto",
                 website: "https://www.i-pex.com/",
-                focus: "Connectors and sensors for robotics and embedded systems.",
-                technologies: "Connectors, sensors",
+                focus: "Connectors and sensors for robotics and embedded systems",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.i-pex.com/careers",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Keigan",
                 location: "Kyoto, Kyoto",
                 website: "https://www.keigan.co.jp/",
-                focus: "Robotics for human-assistive applications and IoT integration.",
-                technologies: "Human-assistive robotics, IoT integration",
+                focus: "Robotics for human-assistive applications and IoT integration",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.keigan.co.jp/recruit",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Cyberdyne Inc.",
                 location: "Tsukuba, Ibaraki",
                 website: "https://www.cyberdyne.jp/",
-                focus: "Wearable robotics (e.g., HAL exoskeletons) for medical and industrial use.",
-                technologies: "HAL exoskeletons",
+                focus: "Wearable robotics (HAL exoskeletons) for medical and industrial use",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.cyberdyne.jp/recruit/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Ibaraki University Labs",
                 location: "Ibaraki",
                 website: "https://www.ibaraki.ac.jp/",
-                focus: "Bio-mimetic and robotics mechatronics labs.",
-                technologies: "Bio-mimetic, robotics mechatronics",
+                focus: "Bio-mimetic and robotics mechatronics labs",
                 funding: "N/A",
                 englishFriendly: "N/A",
-                careerPage: "N/A",
+                careerPage: "https://www.ibaraki.ac.jp/en/employ/",
                 contactEmail: "N/A",
-                notes: "N/A"
             },
             {
                 name: "Tsukuba Robotics",
                 location: "Tsukuba, Ibaraki",
-                website: "Not publicly available",
-                focus: "Robotics startups in Tsukuba Science City, focusing on automation.",
-                technologies: "N/A",
+                website: "N/A",
+                focus: "General term for robotics startups in Tsukuba Science City",
                 funding: "N/A",
                 englishFriendly: "N/A",
                 careerPage: "N/A",
                 contactEmail: "N/A",
-                notes: "N/A"
             }
         ];
 
         let currentSortColumn = null;
         let currentSortDirection = 'asc'; // 'asc' or 'desc'
+        let currentData = [...companiesData];
 
         // Function to render company table rows
         function renderCompanies(companies) {
@@ -917,31 +793,27 @@
 
             if (companies.length === 0) {
                 noResultsDiv.classList.remove('hidden');
-                document.getElementById('companyTable').classList.add('hidden'); // Hide table if no results
+                document.getElementById('companyTable').classList.add('hidden');
                 return;
             } else {
                 noResultsDiv.classList.add('hidden');
-                document.getElementById('companyTable').classList.remove('hidden'); // Show table
+                document.getElementById('companyTable').classList.remove('hidden');
             }
 
             companies.forEach(company => {
                 const row = document.createElement('tr');
-
-                // Helper function to create a clickable link if valid, otherwise return text or 'N/A'
                 const createLinkOrText = (url, isEmail = false) => {
                     if (url && url !== 'N/A' && url.trim() !== '') {
                         if (isEmail) {
                             return `<a href="mailto:${url}" class="flex items-center"><span class="mr-1">📧</span>${url}</a>`;
-                        } else if (url.startsWith('http://') || url.startsWith('https://')) {
+                        } else if (url.startsWith('http')) {
                             try {
                                 const parsedUrl = new URL(url);
                                 return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="flex items-center"><span class="mr-1">🔗</span>${parsedUrl.hostname}</a>`;
                             } catch (e) {
-                                console.error(`Invalid URL for ${company.name}: ${url}`, e);
-                                return `<span class="na-text">${url}</span>`; // Display raw invalid URL as N/A style
+                                return `<span class="na-text">${url}</span>`;
                             }
                         } else {
-                            // For non-absolute URLs (e.g., relative paths, internal portal links), display as text
                             return `<span class="na-text">${url}</span>`;
                         }
                     }
@@ -952,7 +824,6 @@
                     <td class="font-medium text-gray-900">${company.name || '<span class="na-text">N/A</span>'}</td>
                     <td>${company.location !== 'N/A' ? company.location : '<span class="na-text">Not specified</span>'}</td>
                     <td>${company.focus || '<span class="na-text">N/A</span>'}</td>
-                    <td>${company.technologies || '<span class="na-text">N/A</span>'}</td>
                     <td>${company.funding || '<span class="na-text">N/A</span>'}</td>
                     <td>${company.englishFriendly || '<span class="na-text">N/A</span>'}</td>
                     <td>${createLinkOrText(company.website)}</td>
@@ -972,23 +843,22 @@
                 currentSortDirection = 'asc';
             }
 
-            const sortedCompanies = [...companiesData].sort((a, b) => {
+            currentData.sort((a, b) => {
                 const aValue = (a[column] || '').toString().toLowerCase();
                 const bValue = (b[column] || '').toString().toLowerCase();
-
                 if (aValue < bValue) return currentSortDirection === 'asc' ? -1 : 1;
                 if (aValue > bValue) return currentSortDirection === 'asc' ? 1 : -1;
                 return 0;
             });
 
-            renderCompanies(sortedCompanies);
+            renderCompanies(currentData);
             updateSortIcons();
         }
 
         // Function to update sort icons in table headers
         function updateSortIcons() {
             document.querySelectorAll('th .sort-icon').forEach(icon => {
-                icon.textContent = ''; // Clear all icons
+                icon.textContent = '';
             });
 
             if (currentSortColumn) {
@@ -1005,24 +875,16 @@
             const locations = new Set();
             companiesData.forEach(company => {
                 if (company.location && company.location !== 'N/A') {
-                    // Extract city or general region for filtering
                     let locationParts = company.location.split(',').map(part => part.trim());
-                    if (locationParts.length > 1) {
-                        locations.add(locationParts[0]); // Add city (e.g., Osaka, Kyoto, Tokyo, Kobe, Tsukuba)
-                        locations.add(locationParts[1]); // Add prefecture (e.g., Osaka, Kyoto, Tokyo, Hyogo, Ibaraki, Aichi)
-                    } else {
-                        locations.add(locationParts[0]); // Add general region (e.g., Tokyo, Ibaraki)
-                    }
+                    locationParts.forEach(part => locations.add(part));
                 }
             });
 
-            // Add broader regions if not already present from specific city/prefecture
-            const broadRegions = ['Kanto', 'Kansai', 'Hyogo', 'Osaka', 'Kyoto', 'Ibaraki', 'Tokyo'];
+            const broadRegions = ['Kanto', 'Kansai'];
             broadRegions.forEach(region => locations.add(region));
 
-
             Array.from(locations).sort().forEach(location => {
-                if (location) { // Ensure no empty options
+                if (location) {
                     const option = document.createElement('option');
                     option.value = location;
                     option.textContent = location;
@@ -1032,48 +894,42 @@
         }
 
         // Filter companies based on search and location
-        function filterCompanies() {
+        function filterAndRender() {
             const searchTerm = document.getElementById('searchBar').value.toLowerCase();
             const selectedLocation = document.getElementById('locationFilter').value.toLowerCase();
 
-            const filtered = companiesData.filter(company => {
-                const matchesSearch =
-                    (company.name && company.name.toLowerCase().includes(searchTerm)) ||
-                    (company.focus && company.focus.toLowerCase().includes(searchTerm)) ||
-                    (company.technologies && company.technologies.toLowerCase().includes(searchTerm)) ||
-                    (company.location && company.location.toLowerCase().includes(searchTerm)) ||
-                    (company.funding && company.funding.toLowerCase().includes(searchTerm)) ||
-                    (company.englishFriendly && company.englishFriendly.toLowerCase().includes(searchTerm)) ||
-                    (company.website && company.website.toLowerCase().includes(searchTerm)) ||
-                    (company.careerPage && company.careerPage.toLowerCase().includes(searchTerm)) ||
-                    (company.contactEmail && company.contactEmail.toLowerCase().includes(searchTerm));
+            currentData = companiesData.filter(company => {
+                const matchesSearch = Object.values(company).some(value => 
+                    value && value.toString().toLowerCase().includes(searchTerm)
+                );
 
-
-                const matchesLocation =
-                    selectedLocation === '' ||
+                const matchesLocation = selectedLocation === '' || 
                     (company.location && company.location.toLowerCase().includes(selectedLocation)) ||
-                    (selectedLocation === 'kanto' && (company.location.toLowerCase().includes('tokyo') || company.location.toLowerCase().includes('kanagawa') || company.location.toLowerCase().includes('ibaraki') || company.location.toLowerCase().includes('aichi'))) ||
-                    (selectedLocation === 'kansai' && (company.location.toLowerCase().includes('osaka') || company.location.toLowerCase().includes('kyoto') || company.location.toLowerCase().includes('hyogo')));
+                    (selectedLocation === 'kanto' && ['tokyo', 'kanagawa', 'ibaraki', 'aichi'].some(loc => company.location.toLowerCase().includes(loc))) ||
+                    (selectedLocation === 'kansai' && ['osaka', 'kyoto', 'hyogo'].some(loc => company.location.toLowerCase().includes(loc)));
 
                 return matchesSearch && matchesLocation;
             });
-            renderCompanies(filtered);
+            
+            // Reset sort when filtering
+            currentSortColumn = null;
+            updateSortIcons();
+            renderCompanies(currentData);
         }
 
         // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
             populateLocationFilter();
-            renderCompanies(companiesData); // Initial render of all companies
+            renderCompanies(companiesData);
 
-            // Add event listeners for sorting
             document.querySelectorAll('th[data-sort-by]').forEach(header => {
                 header.addEventListener('click', () => {
                     sortCompanies(header.dataset.sortBy);
                 });
             });
 
-            document.getElementById('searchBar').addEventListener('input', filterCompanies);
-            document.getElementById('locationFilter').addEventListener('change', filterCompanies);
+            document.getElementById('searchBar').addEventListener('input', filterAndRender);
+            document.getElementById('locationFilter').addEventListener('change', filterAndRender);
         });
     </script>
 </body>
