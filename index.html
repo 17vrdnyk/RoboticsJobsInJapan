@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japanese Robotics Companies Directory</title>
+    <title>Japanese Robotics &amp; Engineering Directory — Companies &amp; Universities</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
@@ -11,86 +11,70 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
+            background-color: #f0f4f8;
         }
         .gradient-bg {
-            background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            background-image: linear-gradient(135deg, #1e1b4b 0%, #4338ca 50%, #7c3aed 100%);
         }
-        .search-input {
+        .gradient-text {
+            background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .search-input, select {
             transition: all 0.3s ease-in-out;
         }
-        .search-input:focus {
+        .search-input:focus, select:focus {
             outline: none;
-            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* Blue focus ring */
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
         }
         table {
             width: 100%;
-            border-collapse: separate; /* Use separate to allow border-spacing */
-            border-spacing: 0; /* Remove default spacing */
+            border-collapse: separate;
+            border-spacing: 0;
             margin-top: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
-            border-radius: 1rem; /* More rounded corners for the table container */
-            overflow: hidden; /* Ensures rounded corners apply to content */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 1rem;
+            overflow: hidden;
         }
         th, td {
-            padding: 1.25rem 1.5rem; /* Increased padding for more breathing room */
+            padding: 1.25rem 1.5rem;
             text-align: left;
-            /* No individual border-bottom here, rely on row styling */
         }
         th {
-            background-color: #3b82f6; /* A more vibrant blue for header */
-            color: white; /* White text for contrast */
-            font-weight: 700; /* Bolder font weight */
+            background-color: #3b82f6;
+            color: white;
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.9rem; /* Slightly larger font */
-            letter-spacing: 0.05em; /* A bit of letter spacing */
-            border-bottom: 2px solid #2563eb; /* Stronger bottom border for header */
-            cursor: pointer; /* Indicate sortable header */
-            position: sticky; /* Make header sticky */
-            top: 0; /* Stick to the top */
-            z-index: 10; /* Ensure it stays above content */
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid #2563eb;
+            cursor: pointer;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
         }
-        /* Specific rounded corners for header cells */
-        th:first-child {
-            border-top-left-radius: 1rem;
-        }
-        th:last-child {
-            border-top-right-radius: 1rem;
-        }
-
+        th:first-child { border-top-left-radius: 1rem; }
+        th:last-child { border-top-right-radius: 1rem; }
         tr {
-            background-color: #ffffff; /* White background for all rows initially */
+            background-color: #ffffff;
             transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-        tr:nth-child(even) {
-            background-color: #f8fafc; /* Subtle off-white for even rows */
-        }
+        tr:nth-child(even) { background-color: #f8fafc; }
         tr:hover {
-            background-color: #e0f2fe; /* Lighter blue on hover */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow on hover */
-            transform: translateY(-2px); /* Slight lift on hover */
+            background-color: #e0f2fe;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
         }
         td {
-            border-bottom: 1px solid #e2e8f0; /* Light gray border for cells */
-            color: #4a5568; /* Slightly darker text for content */
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
         }
-        /* Remove bottom border for last row's cells */
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        a {
-            color: #1d4ed8; /* Darker blue for links */
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease-in-out;
-        }
-        a:hover {
-            color: #2563eb; /* Lighter blue on hover */
-            text-decoration: underline;
-        }
+        tr:last-child td { border-bottom: none; }
         .na-text {
-            color: #9ca3af; /* Gray text for N/A */
+            color: #9ca3af;
             font-style: italic;
         }
         .sort-icon {
@@ -98,35 +82,88 @@
             font-size: 0.75rem;
             vertical-align: middle;
         }
+        /* Badge styles for universities */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge-national { background: #dbeafe; color: #1e40af; }
+        .badge-public { background: #d1fae5; color: #065f46; }
+        .badge-private { background: #fce7f3; color: #9d174d; }
+        .badge-en { background: #dcfce7; color: #166534; }
+        .badge-jp { background: #fee2e2; color: #991b1b; }
+        .badge-enjp { background: #fef3c7; color: #92400e; }
+        .badge-s { background: #fef9c3; color: #854d0e; border: 1px solid #facc15; }
+        .badge-a { background: #dbeafe; color: #1e3a8a; border: 1px solid #60a5fa; }
+        .badge-b { background: #dcfce7; color: #14532d; border: 1px solid #4ade80; }
+        .badge-c { background: #f3f4f6; color: #374151; border: 1px solid #9ca3af; }
+        /* Stats cards */
+        .stat-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4338ca;
+        }
+        .stat-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        /* Tab styles */
+        .tab-btn {
+            transition: all 0.2s;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            background: #f1f5f9;
+            color: #475569;
+            cursor: pointer;
+        }
+        .tab-btn.active {
+            background: white;
+            color: #1e40af;
+            border-bottom-color: #3b82f6;
+            box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.05);
+        }
+        .section-hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
-    <header class="w-full max-w-6xl text-center mb-12">
-        <h1 class="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-            <span class="gradient-bg bg-clip-text text-transparent">Japanese Robotics Companies</span>
+    <header class="w-full max-w-7xl text-center mb-8">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
+            <span class="gradient-text">Japanese Robotics &amp; Engineering</span>
         </h1>
-        <p class="text-xl text-gray-600">A comprehensive directory of companies in robotics, AI, IoT, and embedded systems.</p>
+        <p class="text-lg text-gray-600">Comprehensive directory of companies and graduate programs in robotics, AI, IoT, and embedded systems.</p>
     </header>
 
-    <main class="w-full max-w-7xl">
-        <!-- Search and Filter Section -->
+    <!-- Tab Navigation -->
+    <div class="w-full max-w-7xl flex gap-1 mb-0">
+        <button id="tabCompanies" class="tab-btn active" onclick="switchTab('companies')">Companies</button>
+        <button id="tabUniversities" class="tab-btn" onclick="switchTab('universities')">Universities</button>
+    </div>
+
+    <!-- ==================== COMPANIES SECTION ==================== -->
+    <section id="companiesSection" class="w-full max-w-7xl">
         <div class="mb-8 p-6 bg-white rounded-xl shadow-lg flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <input
-                type="text"
-                id="searchBar"
-                placeholder="Search by company name, focus area, or location..."
-                class="search-input flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700"
-            >
-            <select
-                id="locationFilter"
-                class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 w-full sm:w-auto"
-            >
+            <input type="text" id="companySearchBar" placeholder="Search by company name, focus area, or location..."
+                class="search-input flex-grow p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700">
+            <select id="companyLocationFilter" class="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 w-full sm:w-auto">
                 <option value="">All Locations</option>
-                <!-- Options will be populated by JavaScript -->
             </select>
         </div>
-
-        <!-- Company Listings Table -->
         <div class="bg-white rounded-xl shadow-lg p-0 sm:p-6 overflow-x-auto">
             <table id="companyTable">
                 <thead>
@@ -141,665 +178,172 @@
                         <th data-sort-by="contactEmail">Contact Email <span class="sort-icon"></span></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Company rows will be injected here by JavaScript -->
-                </tbody>
+                <tbody></tbody>
             </table>
-            <!-- No Results Message -->
-            <div id="noResults" class="hidden text-center text-gray-600 text-lg p-12">
-                No companies found matching your criteria. Please try a different search or filter.
+            <div id="companyNoResults" class="hidden text-center text-gray-600 text-lg p-12">No companies found matching your criteria.</div>
+        </div>
+    </section>
+
+    <!-- ==================== UNIVERSITIES SECTION ==================== -->
+    <section id="universitiesSection" class="w-full max-w-7xl section-hidden">
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <div class="stat-card">
+                <div class="stat-number" id="uniStatTotal">90</div>
+                <div class="stat-label">Universities</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniStatNational">0</div>
+                <div class="stat-label">National</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniStatPublic">0</div>
+                <div class="stat-label">Public</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniStatPrivate">0</div>
+                <div class="stat-label">Private</div>
             </div>
         </div>
-    </main>
+        <!-- Filters -->
+        <div class="mb-6 p-5 bg-white rounded-xl shadow-lg flex flex-col gap-4">
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+                <input type="text" id="uniSearchBar" placeholder="Search university, faculty, or department..."
+                    class="search-input flex-grow p-3 border border-gray-300 rounded-lg text-gray-700">
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <select id="uniTypeFilter" class="p-2.5 border border-gray-300 rounded-lg text-gray-700 text-sm">
+                    <option value="">All Types</option>
+                    <option value="National">National</option>
+                    <option value="Public">Public</option>
+                    <option value="Private">Private</option>
+                </select>
+                <select id="uniPrefectureFilter" class="p-2.5 border border-gray-300 rounded-lg text-gray-700 text-sm">
+                    <option value="">All Prefectures</option>
+                </select>
+                <select id="uniLanguageFilter" class="p-2.5 border border-gray-300 rounded-lg text-gray-700 text-sm">
+                    <option value="">All Languages</option>
+                    <option value="EN">English Only</option>
+                    <option value="EN / JP">English / Japanese</option>
+                    <option value="JP">Japanese Only</option>
+                </select>
+                <select id="uniRatingFilter" class="p-2.5 border border-gray-300 rounded-lg text-gray-700 text-sm">
+                    <option value="">All Ratings</option>
+                    <option value="Top Tier (S)">Top Tier (S)</option>
+                    <option value="Highly Competitive (A)">Highly Competitive (A)</option>
+                    <option value="Competitive (B)">Competitive (B)</option>
+                    <option value="Accessible (C)">Accessible (C)</option>
+                </select>
+            </div>
+        </div>
+        <!-- Table -->
+        <div class="bg-white rounded-xl shadow-lg p-0 sm:p-4 overflow-x-auto">
+            <table id="uniTable">
+                <thead>
+                    <tr>
+                        <th data-sort-by="name">University <span class="sort-icon"></span></th>
+                        <th data-sort-by="type">Type <span class="sort-icon"></span></th>
+                        <th data-sort-by="prefecture">Prefecture <span class="sort-icon"></span></th>
+                        <th data-sort-by="faculty">Faculty / Grad School <span class="sort-icon"></span></th>
+                        <th data-sort-by="department">Department / Track <span class="sort-icon"></span></th>
+                        <th data-sort-by="language">Language <span class="sort-icon"></span></th>
+                        <th data-sort-by="tuitionNum">Tuition (JPY/yr) <span class="sort-icon"></span></th>
+                        <th data-sort-by="rating">Rating <span class="sort-icon"></span></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="uniNoResults" class="hidden text-center text-gray-600 text-lg p-12">No universities found matching your criteria.</div>
+        </div>
+    </section>
 
-    <footer class="w-full max-w-7xl text-center mt-12 py-6 border-t border-gray-200 text-gray-500">
-        <p>&copy; 2025 Robotics Companies Directory. All rights reserved.</p>
+    <footer class="w-full max-w-7xl text-center mt-12 py-6 border-t border-gray-200 text-gray-500 text-sm">
+        <p>&copy; 2025 Robotics & Engineering Directory — Companies &amp; Universities</p>
     </footer>
 
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
-        // Data parsed and researched from the document
+        // ---------- COMPANIES DATA & LOGIC ----------
         const companiesData = [
-            {
-                name: "Prodrone Co., Ltd.",
-                location: "N/A",
-                website: "https://www.prodrone.com/jp/",
-                focus: "Develops drones and control software.",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.prodrone.com/jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Chinougijutsu Co., Ltd.",
-                location: "Osaka, Osaka",
-                website: "https://chinougijutsu.co.jp/",
-                focus: "Robot technology, Image processing, Cleaning robots, Autonomous vehicle control, AI software, Medical devices",
-                funding: "Established 2007, Capital: ¥75M, Sales: ¥150M",
-                englishFriendly: "Yes (Hires \"Highly-Skilled Foreign Professionals\")",
-                careerPage: "https://chinougijutsu.co.jp/recruit",
-                contactEmail: "info@chinou.co.jp",
-            },
-            {
-                name: "Seedea",
-                location: "N/A",
-                website: "https://seedea.jp/",
-                focus: "LSI design, embedded software, and system integration",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://seedea.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "SAZO Inc.",
-                location: "N/A",
-                website: "https://sazo.tech/",
-                focus: "SCM/Logistics Planning with AIoT-based inventory management",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://sazo.tech/join-us/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "PDOLE.inc",
-                location: "N/A",
-                website: "https://pdole.com/",
-                focus: "Global management strategy support with an emphasis on \"Globalize AI\"",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://pdole.com/careers",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Mujin Inc.",
-                location: "Koto, Tokyo",
-                website: "https://mujin-corp.com/",
-                focus: "Intelligent robotics and automation for logistics and industrial applications",
-                funding: "US$85M Series C",
-                englishFriendly: "Likely (Global operations)",
-                careerPage: "https://mujin-corp.com/en/careers/",
-                contactEmail: "info@mujin-corp.com",
-            },
-            {
-                name: "GITAI",
-                location: "N/A",
-                website: "https://gitai.tech/",
-                focus: "Space robotics (satellite servicing, space station tasks, lunar exploration)",
-                funding: "¥4 billion (US$30M) Series B Extension",
-                englishFriendly: "Likely (Global mission)",
-                careerPage: "https://gitai.tech/careers",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Rapyuta Robotics",
-                location: "Koto, Tokyo",
-                website: "https://www.rapyuta-robotics.com/",
-                focus: "Cloud robotics platform, automating \"3D\" jobs (Dirty, Dangerous, Difficult)",
-                funding: "N/A",
-                englishFriendly: "Yes (Team from over 20 countries)",
-                careerPage: "https://www.rapyuta-robotics.com/careers/",
-                contactEmail: "info@rapyuta-robotics.com",
-            },
-            {
-                name: "ZMP / ROBO-HI Corporation",
-                location: "N/A",
-                website: "https://www.zmp.co.jp/",
-                focus: "Autonomous driving technology, Multi-vendor robot platform, Industrial & Life Mobility",
-                funding: "N/A",
-                englishFriendly: "Likely (Lists \"Robotics Engineer (EN)\" roles)",
-                careerPage: "https://www.zmp.co.jp/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Tier IV",
-                location: "Nagoya, Aichi",
-                website: "https://tier4.jp/",
-                focus: "Open-source software for self-driving technology",
-                funding: "¥10,985M Series A",
-                englishFriendly: "Likely (Global collaboration)",
-                careerPage: "https://tier4.jp/en/careers/",
-                contactEmail: "careers@tier4.jp",
-            },
-            {
-                name: "GROOVE X",
-                location: "N/A",
-                website: "https://groove-x.com/",
-                focus: "Consumer robotics, home robots (LOVOT)",
-                funding: "N/A",
-                englishFriendly: "Likely (New business field)",
-                careerPage: "https://www.wantedly.com/companies/groove-x",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Telexistence Inc.",
-                location: "Minato, Tokyo",
-                website: "https://tx-inc.com/",
-                focus: "AI-powered robotic solutions for retail and logistics automation",
-                funding: "N/A",
-                englishFriendly: "Likely (Seeks global professionals)",
-                careerPage: "https://tx-inc.com/en/career/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Smile Robotics",
-                location: "N/A",
-                website: "https://smilerobotics.com/",
-                focus: "In-house robotic products for service industries, mobile robot development platform",
-                funding: "N/A",
-                englishFriendly: "Likely (Recruiting interns)",
-                careerPage: "https://smilerobotics.com/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Coarobo GK",
-                location: "N/A",
-                website: "https://coarobo.com/",
-                focus: "Containerized Software Development Environment (SDE) for service robotics and AI",
-                funding: "N/A",
-                englishFriendly: "Unclear",
-                careerPage: "N/A",
-                contactEmail: "info@coarobo.com",
-            },
-            {
-                name: "SkyDrive Inc.",
-                location: "N/A",
-                website: "https://en.skydrive2020.com/",
-                focus: "Flying cars and cargo drones",
-                funding: "¥4,064M Series B",
-                englishFriendly: "Likely (Aiming for global launch)",
-                careerPage: "https://en.skydrive2020.com/career",
-                contactEmail: "N/A",
-            },
-            {
-                name: "DeepX",
-                location: "N/A",
-                website: "https://www.deepx.co.jp/",
-                focus: "Robotics system integration, automating any machine",
-                funding: "N/A",
-                englishFriendly: "Yes (\"No Japanese required\")",
-                careerPage: "https://www.deepx.co.jp/en/careers",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Flower Robotics",
-                location: "N/A",
-                website: "https://www.flower-robotics.com/",
-                focus: "Design and development of various robots, consumer robotics",
-                funding: "N/A",
-                englishFriendly: "Unclear",
-                careerPage: "N/A (Contact form on website)",
-                contactEmail: "contact@flower-robotics.com",
-            },
-            {
-                name: "Hibot Inc.",
-                location: "N/A",
-                website: "https://www.hibot.co.jp/",
-                focus: "Mobile robotics for industrial inspection and maintenance",
-                funding: "N/A",
-                englishFriendly: "Unclear",
-                careerPage: "https://www.hibot.co.jp/en/recruit-en/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Kyoto Robotics (3D MEDiA Co., Ltd.)",
-                location: "Kyoto, Kyoto",
-                website: "https://www.kyotorobotics.co.jp/",
-                focus: "3D robot vision systems for industrial use, logistics",
-                funding: "¥800M authorized investment",
-                englishFriendly: "Unclear",
-                careerPage: "https://www.kyotorobotics.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Kudan Inc.",
-                location: "N/A",
-                website: "https://www.kudan.io/",
-                focus: "SLAM technology for AR/VR and autonomous navigation",
-                funding: "N/A",
-                englishFriendly: "Unclear",
-                careerPage: "https://www.kudan.io/careers",
-                contactEmail: "contact@kudan.eu",
-            },
-            {
-                name: "Nikko Co.Ltd",
-                location: "N/A",
-                website: "https://www.nikko-company.co.jp/",
-                focus: "General Machinery",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.nikko-company.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "NEXT. Inc.",
-                location: "N/A",
-                website: "https://www.next-system.com/",
-                focus: "AR/AI Systems, Electrical Machinery, Software",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.next-system.com/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "ELIS CO., LTD.",
-                location: "N/A",
-                website: "https://www.elis.co.jp/",
-                focus: "General Machinery, Electrical Machinery, Professional Service",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.elis.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "GMO Research, Inc.",
-                location: "N/A",
-                website: "https://gmo-research.jp/",
-                focus: "Communication and Information and Software",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://gmo-research.jp/recruit-en",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Okwi.inc",
-                location: "N/A",
-                website: "https://okwi.jp/",
-                focus: "Professional Service, Communication and Information and Software",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "N/A (Contact form on website)",
-                contactEmail: "N/A",
-            },
-            {
-                name: "XELA Robotics",
-                location: "N/A",
-                website: "https://www.xelarobotics.com/",
-                focus: "Robotics Innovation, Haptic Technology, Tactile Sensors",
-                funding: "N/A",
-                englishFriendly: "Open to English speakers",
-                careerPage: "https://www.xelarobotics.com/jobs",
-                contactEmail: "job@xelarobotics.com",
-            },
-            {
-                name: "SoftBank Robotics",
-                location: "N/A",
-                website: "https://www.softbankrobotics.com/",
-                focus: "Humanoid Robots, Service Robotics (Pepper, Whiz)",
-                funding: "N/A",
-                englishFriendly: "Global company",
-                careerPage: "https://www.softbankrobotics.com/corp/recruit/",
-                contactEmail: "SBRGRP-PR@g.softbank.co.jp",
-            },
-            {
-                name: "LeapMind",
-                location: "N/A",
-                website: "https://leapmind.io/",
-                focus: "Compact Deep Learning for Edge Devices",
-                funding: "N/A",
-                englishFriendly: "Business contact available",
-                careerPage: "https://leapmind.io/en/careers/",
-                contactEmail: "business@leapmind.io",
-            },
-            {
-                name: "FANUC",
-                location: "N/A",
-                website: "https://www.fanuc.co.jp/",
-                focus: "Industrial Automation, Robots, CNC, ROBOMACHINEs",
-                funding: "N/A",
-                englishFriendly: "Global company",
-                careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Yaskawa Electric",
-                location: "N/A",
-                website: "https://www.yaskawa-global.com/",
-                focus: "Industrial Robotics Components, Drives, Motion Control",
-                funding: "N/A",
-                englishFriendly: "Global company",
-                careerPage: "https://www.yaskawa-global.com/recruit",
-                contactEmail: "web_mstr@yaskawa.co.jp",
-            },
-            {
-                name: "Guide Robotics Inc.",
-                location: "N/A",
-                website: "N/A",
-                focus: "Robotics",
-                funding: "N/A",
-                englishFriendly: "Explicitly \"Only English Required.\"",
-                careerPage: "N/A (Listed on JETRO portal)",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Connected Robotics",
-                location: "Koganei, Tokyo",
-                website: "https://connected-robotics.com/",
-                focus: "Food industry robotics (OctoChef, automated dishwasher robots)",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://connected-robotics.com/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Preferred Networks",
-                location: "Chiyoda, Tokyo",
-                website: "https://www.pfn.jp/",
-                focus: "Deep learning for robotics, manufacturing, and IoT integration",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.pfn.jp/careers",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Muse Inc.",
-                location: "Shibuya, Tokyo",
-                website: "https://www.museinc.co.jp/",
-                focus: "IoT solutions, embedded systems, and smart device integration",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.museinc.co.jp/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Tokyo Robotics",
-                location: "Bunkyo, Tokyo",
-                website: "https://robotics.tokyo/",
-                focus: "Humanoid and service robots (Torobo for manufacturing, logistics)",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://robotics.tokyo/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Ascent Robotics",
-                location: "Shibuya, Tokyo",
-                website: "https://ascent.ai/",
-                focus: "AI-driven robotics for industrial and autonomous mobility solutions",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://ascent.ai/careers/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "QBIT Robotics",
-                location: "Minato, Tokyo",
-                website: "https://www.qbit-robotics.co.jp/",
-                focus: "Service robotics for restaurants and retail (telepresence robots)",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.qbit-robotics.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Yukai Engineering",
-                location: "Taito, Tokyo",
-                website: "https://www.yukai.co.jp/",
-                focus: "Consumer robotics and IoT (BOCCO communication robot)",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.yukai.co.jp/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Life Robotics",
-                location: "Tokyo",
-                website: "https://www.fanuc.co.jp/",
-                focus: "Collaborative robot arms (Acquired by FANUC)",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html",
-                contactEmail: "N/A",
-            },
-            {
-                name: "SEQSENSE",
-                location: "Chuo, Tokyo",
-                website: "https://www.seqsense.com/",
-                focus: "Autonomous mobile robots for security and facility management",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.seqsense.com/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Aba",
-                location: "Osaka, Osaka",
-                website: "https://aba-lab.com/",
-                focus: "Robotics for nursing care and assistive technologies",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://aba-lab.com/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "GramEye",
-                location: "Osaka, Osaka",
-                website: "https://grameye.com/",
-                focus: "AI and robotics for visual inspection in manufacturing",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://grameye.com/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "NIT Consultant",
-                location: "Osaka, Osaka",
-                website: "N/A",
-                focus: "Robotics consulting and system integration for industrial applications",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "N/A",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Smart Robotics",
-                location: "Tokyo",
-                website: "https://www.smartrobotics.jp/",
-                focus: "IoT and robotics for drones and automation solutions",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.smartrobotics.jp/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "SteraVision",
-                location: "Tokyo",
-                website: "N/A",
-                focus: "Visual systems for robotics and embedded applications",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "N/A",
-                contactEmail: "N/A",
-            },
-            {
-                name: "KiQ Robotics",
-                location: "Osaka, Osaka",
-                website: "https://kiq-robotics.com/",
-                focus: "Industrial robotics for automation and manufacturing",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://kiq-robotics.com/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "SENSYN ROBOTICS",
-                location: "Shibuya, Tokyo",
-                website: "https://www.sensyn-robotics.com/",
-                focus: "Drone-based robotics and IoT for inspection and surveillance",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.sensyn-robotics.com/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "HarvestX",
-                location: "Bunkyo, Tokyo",
-                website: "https://harvestx.jp/",
-                focus: "Agricultural robotics for automated harvesting and IoT integration",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://harvestx.jp/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "ATR (Advanced Telecommunications Research Institute)",
-                location: "Kyoto, Kyoto",
-                website: "https://www.atr.jp/",
-                focus: "Humanoid robotics and AI research, human-robot interaction",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.atr.jp/jobs/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Cross Effect",
-                location: "Kyoto, Kyoto",
-                website: "https://www.crosseffect.co.jp/",
-                focus: "Embedded systems and IoT for robotics and automation",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.crosseffect.co.jp/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "OPExPARK",
-                location: "Osaka, Osaka",
-                website: "https://www.opexpark.co.jp/",
-                focus: "IoT and robotics for medical and industrial applications",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.opexpark.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Integral Technology",
-                location: "Osaka, Osaka",
-                website: "https://integral-technology.co.jp/",
-                focus: "Embedded systems and AI for robotics and IoT solutions",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://integral-technology.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Soracom",
-                location: "Setagaya, Tokyo",
-                website: "https://www.soracom.io/",
-                focus: "IoT platforms for robotics and connected devices",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.soracom.io/careers/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "H3 Dynamics",
-                location: "Tokyo",
-                website: "https://www.h3dynamics.com/",
-                focus: "Drone-based robotics and IoT for industrial inspections",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.h3dynamics.com/careers",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Kosmek Ltd.",
-                location: "Kobe, Hyogo",
-                website: "https://www.kosmek.co.jp/",
-                focus: "Robotic hand changers, clamps, and automation equipment",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.kosmek.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Kawada Robotics",
-                location: "Kobe, Hyogo",
-                website: "https://www.kawadarobot.co.jp/",
-                focus: "Humanoid and collaborative robots for industrial and service applications",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.kawadarobot.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Nextage",
-                location: "Kobe, Hyogo",
-                website: "https://www.nextage.co.jp/",
-                focus: "IoT and embedded systems for smart manufacturing and robotics integration",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.nextage.co.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "I-PEX (Dai-Ichi Seiko)",
-                location: "Kyoto, Kyoto",
-                website: "https://www.i-pex.com/",
-                focus: "Connectors and sensors for robotics and embedded systems",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.i-pex.com/careers",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Keigan",
-                location: "Kyoto, Kyoto",
-                website: "https://www.keigan.co.jp/",
-                focus: "Robotics for human-assistive applications and IoT integration",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.keigan.co.jp/recruit",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Cyberdyne Inc.",
-                location: "Tsukuba, Ibaraki",
-                website: "https://www.cyberdyne.jp/",
-                focus: "Wearable robotics (HAL exoskeletons) for medical and industrial use",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.cyberdyne.jp/recruit/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Ibaraki University Labs",
-                location: "Ibaraki",
-                website: "https://www.ibaraki.ac.jp/",
-                focus: "Bio-mimetic and robotics mechatronics labs",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "https://www.ibaraki.ac.jp/en/employ/",
-                contactEmail: "N/A",
-            },
-            {
-                name: "Tsukuba Robotics",
-                location: "Tsukuba, Ibaraki",
-                website: "N/A",
-                focus: "General term for robotics startups in Tsukuba Science City",
-                funding: "N/A",
-                englishFriendly: "N/A",
-                careerPage: "N/A",
-                contactEmail: "N/A",
-            }
+            { name: "Prodrone Co., Ltd.", location: "N/A", website: "https://www.prodrone.com/jp/", focus: "Develops drones and control software.", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.prodrone.com/jp/recruit/", contactEmail: "N/A" },
+            { name: "Chinougijutsu Co., Ltd.", location: "Osaka, Osaka", website: "https://chinougijutsu.co.jp/", focus: "Robot technology, Image processing, Cleaning robots, Autonomous vehicle control, AI software, Medical devices", funding: "Established 2007, Capital: ¥75M, Sales: ¥150M", englishFriendly: "Yes (Hires \"Highly-Skilled Foreign Professionals\")", careerPage: "https://chinougijutsu.co.jp/recruit", contactEmail: "info@chinou.co.jp" },
+            { name: "Seedea", location: "N/A", website: "https://seedea.jp/", focus: "LSI design, embedded software, and system integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://seedea.jp/recruit/", contactEmail: "N/A" },
+            { name: "SAZO Inc.", location: "N/A", website: "https://sazo.tech/", focus: "SCM/Logistics Planning with AIoT-based inventory management", funding: "N/A", englishFriendly: "N/A", careerPage: "https://sazo.tech/join-us/", contactEmail: "N/A" },
+            { name: "PDOLE.inc", location: "N/A", website: "https://pdole.com/", focus: "Global management strategy support with an emphasis on \"Globalize AI\"", funding: "N/A", englishFriendly: "N/A", careerPage: "https://pdole.com/careers", contactEmail: "N/A" },
+            { name: "Mujin Inc.", location: "Koto, Tokyo", website: "https://mujin-corp.com/", focus: "Intelligent robotics and automation for logistics and industrial applications", funding: "US$85M Series C", englishFriendly: "Likely (Global operations)", careerPage: "https://mujin-corp.com/en/careers/", contactEmail: "info@mujin-corp.com" },
+            { name: "GITAI", location: "N/A", website: "https://gitai.tech/", focus: "Space robotics (satellite servicing, space station tasks, lunar exploration)", funding: "¥4 billion (US$30M) Series B Extension", englishFriendly: "Likely (Global mission)", careerPage: "https://gitai.tech/careers", contactEmail: "N/A" },
+            { name: "Rapyuta Robotics", location: "Koto, Tokyo", website: "https://www.rapyuta-robotics.com/", focus: "Cloud robotics platform, automating \"3D\" jobs (Dirty, Dangerous, Difficult)", funding: "N/A", englishFriendly: "Yes (Team from over 20 countries)", careerPage: "https://www.rapyuta-robotics.com/careers/", contactEmail: "info@rapyuta-robotics.com" },
+            { name: "ZMP / ROBO-HI Corporation", location: "N/A", website: "https://www.zmp.co.jp/", focus: "Autonomous driving technology, Multi-vendor robot platform, Industrial & Life Mobility", funding: "N/A", englishFriendly: "Likely (Lists \"Robotics Engineer (EN)\" roles)", careerPage: "https://www.zmp.co.jp/recruit", contactEmail: "N/A" },
+            { name: "Tier IV", location: "Nagoya, Aichi", website: "https://tier4.jp/", focus: "Open-source software for self-driving technology", funding: "¥10,985M Series A", englishFriendly: "Likely (Global collaboration)", careerPage: "https://tier4.jp/en/careers/", contactEmail: "careers@tier4.jp" },
+            { name: "GROOVE X", location: "N/A", website: "https://groove-x.com/", focus: "Consumer robotics, home robots (LOVOT)", funding: "N/A", englishFriendly: "Likely (New business field)", careerPage: "https://www.wantedly.com/companies/groove-x", contactEmail: "N/A" },
+            { name: "Telexistence Inc.", location: "Minato, Tokyo", website: "https://tx-inc.com/", focus: "AI-powered robotic solutions for retail and logistics automation", funding: "N/A", englishFriendly: "Likely (Seeks global professionals)", careerPage: "https://tx-inc.com/en/career/", contactEmail: "N/A" },
+            { name: "Smile Robotics", location: "N/A", website: "https://smilerobotics.com/", focus: "In-house robotic products for service industries, mobile robot development platform", funding: "N/A", englishFriendly: "Likely (Recruiting interns)", careerPage: "https://smilerobotics.com/recruit", contactEmail: "N/A" },
+            { name: "Coarobo GK", location: "N/A", website: "https://coarobo.com/", focus: "Containerized Software Development Environment (SDE) for service robotics and AI", funding: "N/A", englishFriendly: "Unclear", careerPage: "N/A", contactEmail: "info@coarobo.com" },
+            { name: "SkyDrive Inc.", location: "N/A", website: "https://en.skydrive2020.com/", focus: "Flying cars and cargo drones", funding: "¥4,064M Series B", englishFriendly: "Likely (Aiming for global launch)", careerPage: "https://en.skydrive2020.com/career", contactEmail: "N/A" },
+            { name: "DeepX", location: "N/A", website: "https://www.deepx.co.jp/", focus: "Robotics system integration, automating any machine", funding: "N/A", englishFriendly: "Yes (\"No Japanese required\")", careerPage: "https://www.deepx.co.jp/en/careers", contactEmail: "N/A" },
+            { name: "Flower Robotics", location: "N/A", website: "https://www.flower-robotics.com/", focus: "Design and development of various robots, consumer robotics", funding: "N/A", englishFriendly: "Unclear", careerPage: "N/A (Contact form on website)", contactEmail: "contact@flower-robotics.com" },
+            { name: "Hibot Inc.", location: "N/A", website: "https://www.hibot.co.jp/", focus: "Mobile robotics for industrial inspection and maintenance", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.hibot.co.jp/en/recruit-en/", contactEmail: "N/A" },
+            { name: "Kyoto Robotics (3D MEDiA Co., Ltd.)", location: "Kyoto, Kyoto", website: "https://www.kyotorobotics.co.jp/", focus: "3D robot vision systems for industrial use, logistics", funding: "¥800M authorized investment", englishFriendly: "Unclear", careerPage: "https://www.kyotorobotics.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "Kudan Inc.", location: "N/A", website: "https://www.kudan.io/", focus: "SLAM technology for AR/VR and autonomous navigation", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.kudan.io/careers", contactEmail: "contact@kudan.eu" },
+            { name: "Nikko Co.Ltd", location: "N/A", website: "https://www.nikko-company.co.jp/", focus: "General Machinery", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.nikko-company.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "NEXT. Inc.", location: "N/A", website: "https://www.next-system.com/", focus: "AR/AI Systems, Electrical Machinery, Software", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.next-system.com/recruit", contactEmail: "N/A" },
+            { name: "ELIS CO., LTD.", location: "N/A", website: "https://www.elis.co.jp/", focus: "General Machinery, Electrical Machinery, Professional Service", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.elis.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "GMO Research, Inc.", location: "N/A", website: "https://gmo-research.jp/", focus: "Communication and Information and Software", funding: "N/A", englishFriendly: "N/A", careerPage: "https://gmo-research.jp/recruit-en", contactEmail: "N/A" },
+            { name: "Okwi.inc", location: "N/A", website: "https://okwi.jp/", focus: "Professional Service, Communication and Information and Software", funding: "N/A", englishFriendly: "N/A", careerPage: "N/A (Contact form on website)", contactEmail: "N/A" },
+            { name: "XELA Robotics", location: "N/A", website: "https://www.xelarobotics.com/", focus: "Robotics Innovation, Haptic Technology, Tactile Sensors", funding: "N/A", englishFriendly: "Open to English speakers", careerPage: "https://www.xelarobotics.com/jobs", contactEmail: "job@xelarobotics.com" },
+            { name: "SoftBank Robotics", location: "N/A", website: "https://www.softbankrobotics.com/", focus: "Humanoid Robots, Service Robotics (Pepper, Whiz)", funding: "N/A", englishFriendly: "Global company", careerPage: "https://www.softbankrobotics.com/corp/recruit/", contactEmail: "SBRGRP-PR@g.softbank.co.jp" },
+            { name: "LeapMind", location: "N/A", website: "https://leapmind.io/", focus: "Compact Deep Learning for Edge Devices", funding: "N/A", englishFriendly: "Business contact available", careerPage: "https://leapmind.io/en/careers/", contactEmail: "business@leapmind.io" },
+            { name: "FANUC", location: "N/A", website: "https://www.fanuc.co.jp/", focus: "Industrial Automation, Robots, CNC, ROBOMACHINEs", funding: "N/A", englishFriendly: "Global company", careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html", contactEmail: "N/A" },
+            { name: "Yaskawa Electric", location: "N/A", website: "https://www.yaskawa-global.com/", focus: "Industrial Robotics Components, Drives, Motion Control", funding: "N/A", englishFriendly: "Global company", careerPage: "https://www.yaskawa-global.com/recruit", contactEmail: "web_mstr@yaskawa.co.jp" },
+            { name: "Guide Robotics Inc.", location: "N/A", website: "N/A", focus: "Robotics", funding: "N/A", englishFriendly: "Explicitly \"Only English Required.\"", careerPage: "N/A (Listed on JETRO portal)", contactEmail: "N/A" },
+            { name: "Connected Robotics", location: "Koganei, Tokyo", website: "https://connected-robotics.com/", focus: "Food industry robotics (OctoChef, automated dishwasher robots)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://connected-robotics.com/recruit/", contactEmail: "N/A" },
+            { name: "Preferred Networks", location: "Chiyoda, Tokyo", website: "https://www.pfn.jp/", focus: "Deep learning for robotics, manufacturing, and IoT integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.pfn.jp/careers", contactEmail: "N/A" },
+            { name: "Muse Inc.", location: "Shibuya, Tokyo", website: "https://www.museinc.co.jp/", focus: "IoT solutions, embedded systems, and smart device integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.museinc.co.jp/recruit", contactEmail: "N/A" },
+            { name: "Tokyo Robotics", location: "Bunkyo, Tokyo", website: "https://robotics.tokyo/", focus: "Humanoid and service robots (Torobo for manufacturing, logistics)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://robotics.tokyo/recruit/", contactEmail: "N/A" },
+            { name: "Ascent Robotics", location: "Shibuya, Tokyo", website: "https://ascent.ai/", focus: "AI-driven robotics for industrial and autonomous mobility solutions", funding: "N/A", englishFriendly: "N/A", careerPage: "https://ascent.ai/careers/", contactEmail: "N/A" },
+            { name: "QBIT Robotics", location: "Minato, Tokyo", website: "https://www.qbit-robotics.co.jp/", focus: "Service robotics for restaurants and retail (telepresence robots)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.qbit-robotics.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "Yukai Engineering", location: "Taito, Tokyo", website: "https://www.yukai.co.jp/", focus: "Consumer robotics and IoT (BOCCO communication robot)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.yukai.co.jp/recruit", contactEmail: "N/A" },
+            { name: "Life Robotics", location: "Tokyo", website: "https://www.fanuc.co.jp/", focus: "Collaborative robot arms (Acquired by FANUC)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html", contactEmail: "N/A" },
+            { name: "SEQSENSE", location: "Chuo, Tokyo", website: "https://www.seqsense.com/", focus: "Autonomous mobile robots for security and facility management", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.seqsense.com/recruit/", contactEmail: "N/A" },
+            { name: "Aba", location: "Osaka, Osaka", website: "https://aba-lab.com/", focus: "Robotics for nursing care and assistive technologies", funding: "N/A", englishFriendly: "N/A", careerPage: "https://aba-lab.com/recruit", contactEmail: "N/A" },
+            { name: "GramEye", location: "Osaka, Osaka", website: "https://grameye.com/", focus: "AI and robotics for visual inspection in manufacturing", funding: "N/A", englishFriendly: "N/A", careerPage: "https://grameye.com/recruit", contactEmail: "N/A" },
+            { name: "NIT Consultant", location: "Osaka, Osaka", website: "N/A", focus: "Robotics consulting and system integration for industrial applications", funding: "N/A", englishFriendly: "N/A", careerPage: "N/A", contactEmail: "N/A" },
+            { name: "Smart Robotics", location: "Tokyo", website: "https://www.smartrobotics.jp/", focus: "IoT and robotics for drones and automation solutions", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.smartrobotics.jp/recruit", contactEmail: "N/A" },
+            { name: "SteraVision", location: "Tokyo", website: "N/A", focus: "Visual systems for robotics and embedded applications", funding: "N/A", englishFriendly: "N/A", careerPage: "N/A", contactEmail: "N/A" },
+            { name: "KiQ Robotics", location: "Osaka, Osaka", website: "https://kiq-robotics.com/", focus: "Industrial robotics for automation and manufacturing", funding: "N/A", englishFriendly: "N/A", careerPage: "https://kiq-robotics.com/recruit", contactEmail: "N/A" },
+            { name: "SENSYN ROBOTICS", location: "Shibuya, Tokyo", website: "https://www.sensyn-robotics.com/", focus: "Drone-based robotics and IoT for inspection and surveillance", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.sensyn-robotics.com/recruit", contactEmail: "N/A" },
+            { name: "HarvestX", location: "Bunkyo, Tokyo", website: "https://harvestx.jp/", focus: "Agricultural robotics for automated harvesting and IoT integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://harvestx.jp/recruit", contactEmail: "N/A" },
+            { name: "ATR (Advanced Telecommunications Research Institute)", location: "Kyoto, Kyoto", website: "https://www.atr.jp/", focus: "Humanoid robotics and AI research, human-robot interaction", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.atr.jp/jobs/", contactEmail: "N/A" },
+            { name: "Cross Effect", location: "Kyoto, Kyoto", website: "https://www.crosseffect.co.jp/", focus: "Embedded systems and IoT for robotics and automation", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.crosseffect.co.jp/recruit", contactEmail: "N/A" },
+            { name: "OPExPARK", location: "Osaka, Osaka", website: "https://www.opexpark.co.jp/", focus: "IoT and robotics for medical and industrial applications", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.opexpark.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "Integral Technology", location: "Osaka, Osaka", website: "https://integral-technology.co.jp/", focus: "Embedded systems and AI for robotics and IoT solutions", funding: "N/A", englishFriendly: "N/A", careerPage: "https://integral-technology.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "Soracom", location: "Setagaya, Tokyo", website: "https://www.soracom.io/", focus: "IoT platforms for robotics and connected devices", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.soracom.io/careers/", contactEmail: "N/A" },
+            { name: "H3 Dynamics", location: "Tokyo", website: "https://www.h3dynamics.com/", focus: "Drone-based robotics and IoT for industrial inspections", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.h3dynamics.com/careers", contactEmail: "N/A" },
+            { name: "Kosmek Ltd.", location: "Kobe, Hyogo", website: "https://www.kosmek.co.jp/", focus: "Robotic hand changers, clamps, and automation equipment", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.kosmek.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "Kawada Robotics", location: "Kobe, Hyogo", website: "https://www.kawadarobot.co.jp/", focus: "Humanoid and collaborative robots for industrial and service applications", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.kawadarobot.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "Nextage", location: "Kobe, Hyogo", website: "https://www.nextage.co.jp/", focus: "IoT and embedded systems for smart manufacturing and robotics integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.nextage.co.jp/recruit/", contactEmail: "N/A" },
+            { name: "I-PEX (Dai-Ichi Seiko)", location: "Kyoto, Kyoto", website: "https://www.i-pex.com/", focus: "Connectors and sensors for robotics and embedded systems", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.i-pex.com/careers", contactEmail: "N/A" },
+            { name: "Keigan", location: "Kyoto, Kyoto", website: "https://www.keigan.co.jp/", focus: "Robotics for human-assistive applications and IoT integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.keigan.co.jp/recruit", contactEmail: "N/A" },
+            { name: "Cyberdyne Inc.", location: "Tsukuba, Ibaraki", website: "https://www.cyberdyne.jp/", focus: "Wearable robotics (HAL exoskeletons) for medical and industrial use", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.cyberdyne.jp/recruit/", contactEmail: "N/A" },
+            { name: "Ibaraki University Labs", location: "Ibaraki", website: "https://www.ibaraki.ac.jp/", focus: "Bio-mimetic and robotics mechatronics labs", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.ibaraki.ac.jp/en/employ/", contactEmail: "N/A" },
+            { name: "Tsukuba Robotics", location: "Tsukuba, Ibaraki", website: "N/A", focus: "General term for robotics startups in Tsukuba Science City", funding: "N/A", englishFriendly: "N/A", careerPage: "N/A", contactEmail: "N/A" }
         ];
 
-        let currentSortColumn = null;
-        let currentSortDirection = 'asc'; // 'asc' or 'desc'
-        let currentData = [...companiesData];
+        let companyCurrentSortColumn = null;
+        let companyCurrentSortDirection = 'asc';
+        let companyCurrentData = [...companiesData];
 
-        // Function to render company table rows
         function renderCompanies(companies) {
-            const companyTableBody = document.querySelector('#companyTable tbody');
-            companyTableBody.innerHTML = ''; // Clear previous results
-            const noResultsDiv = document.getElementById('noResults');
-
+            const tbody = document.querySelector('#companyTable tbody');
+            tbody.innerHTML = '';
+            const noRes = document.getElementById('companyNoResults');
             if (companies.length === 0) {
-                noResultsDiv.classList.remove('hidden');
+                noRes.classList.remove('hidden');
                 document.getElementById('companyTable').classList.add('hidden');
                 return;
-            } else {
-                noResultsDiv.classList.add('hidden');
-                document.getElementById('companyTable').classList.remove('hidden');
             }
-
+            noRes.classList.add('hidden');
+            document.getElementById('companyTable').classList.remove('hidden');
             companies.forEach(company => {
                 const row = document.createElement('tr');
                 const createLinkOrText = (url, isEmail = false) => {
@@ -819,7 +363,6 @@
                     }
                     return `<span class="na-text">N/A</span>`;
                 };
-
                 row.innerHTML = `
                     <td class="font-medium text-gray-900">${company.name || '<span class="na-text">N/A</span>'}</td>
                     <td>${company.location !== 'N/A' ? company.location : '<span class="na-text">Not specified</span>'}</td>
@@ -830,106 +373,323 @@
                     <td>${createLinkOrText(company.careerPage)}</td>
                     <td>${createLinkOrText(company.contactEmail, true)}</td>
                 `;
-                companyTableBody.appendChild(row);
+                tbody.appendChild(row);
             });
         }
 
-        // Function to sort companies
         function sortCompanies(column) {
-            if (currentSortColumn === column) {
-                currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            if (companyCurrentSortColumn === column) {
+                companyCurrentSortDirection = companyCurrentSortDirection === 'asc' ? 'desc' : 'asc';
             } else {
-                currentSortColumn = column;
-                currentSortDirection = 'asc';
+                companyCurrentSortColumn = column;
+                companyCurrentSortDirection = 'asc';
             }
-
-            currentData.sort((a, b) => {
-                const aValue = (a[column] || '').toString().toLowerCase();
-                const bValue = (b[column] || '').toString().toLowerCase();
-                if (aValue < bValue) return currentSortDirection === 'asc' ? -1 : 1;
-                if (aValue > bValue) return currentSortDirection === 'asc' ? 1 : -1;
+            companyCurrentData.sort((a, b) => {
+                const aVal = (a[column] || '').toString().toLowerCase();
+                const bVal = (b[column] || '').toString().toLowerCase();
+                if (aVal < bVal) return companyCurrentSortDirection === 'asc' ? -1 : 1;
+                if (aVal > bVal) return companyCurrentSortDirection === 'asc' ? 1 : -1;
                 return 0;
             });
-
-            renderCompanies(currentData);
-            updateSortIcons();
+            renderCompanies(companyCurrentData);
+            updateCompanySortIcons();
         }
 
-        // Function to update sort icons in table headers
-        function updateSortIcons() {
-            document.querySelectorAll('th .sort-icon').forEach(icon => {
-                icon.textContent = '';
-            });
-
-            if (currentSortColumn) {
-                const currentHeader = document.querySelector(`th[data-sort-by="${currentSortColumn}"] .sort-icon`);
-                if (currentHeader) {
-                    currentHeader.textContent = currentSortDirection === 'asc' ? '▲' : '▼';
-                }
+        function updateCompanySortIcons() {
+            document.querySelectorAll('#companyTable th .sort-icon').forEach(i => i.textContent = '');
+            if (companyCurrentSortColumn) {
+                const h = document.querySelector(`#companyTable th[data-sort-by="${companyCurrentSortColumn}"] .sort-icon`);
+                if (h) h.textContent = companyCurrentSortDirection === 'asc' ? '▲' : '▼';
             }
         }
 
-        // Populate location filter options
-        function populateLocationFilter() {
-            const locationFilter = document.getElementById('locationFilter');
-            const locations = new Set();
-            companiesData.forEach(company => {
-                if (company.location && company.location !== 'N/A') {
-                    let locationParts = company.location.split(',').map(part => part.trim());
-                    locationParts.forEach(part => locations.add(part));
+        function populateCompanyLocationFilter() {
+            const sel = document.getElementById('companyLocationFilter');
+            const locs = new Set();
+            companiesData.forEach(c => {
+                if (c.location && c.location !== 'N/A') {
+                    c.location.split(',').map(p => p.trim()).forEach(p => locs.add(p));
                 }
             });
-
-            const broadRegions = ['Kanto', 'Kansai'];
-            broadRegions.forEach(region => locations.add(region));
-
-            Array.from(locations).sort().forEach(location => {
-                if (location) {
-                    const option = document.createElement('option');
-                    option.value = location;
-                    option.textContent = location;
-                    locationFilter.appendChild(option);
+            ['Kanto', 'Kansai'].forEach(r => locs.add(r));
+            Array.from(locs).sort().forEach(loc => {
+                if (loc) {
+                    const opt = document.createElement('option');
+                    opt.value = loc;
+                    opt.textContent = loc;
+                    sel.appendChild(opt);
                 }
             });
         }
 
-        // Filter companies based on search and location
-        function filterAndRender() {
-            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            const selectedLocation = document.getElementById('locationFilter').value.toLowerCase();
-
-            currentData = companiesData.filter(company => {
-                const matchesSearch = Object.values(company).some(value => 
-                    value && value.toString().toLowerCase().includes(searchTerm)
-                );
-
-                const matchesLocation = selectedLocation === '' || 
-                    (company.location && company.location.toLowerCase().includes(selectedLocation)) ||
-                    (selectedLocation === 'kanto' && ['tokyo', 'kanagawa', 'ibaraki', 'aichi'].some(loc => company.location.toLowerCase().includes(loc))) ||
-                    (selectedLocation === 'kansai' && ['osaka', 'kyoto', 'hyogo'].some(loc => company.location.toLowerCase().includes(loc)));
-
-                return matchesSearch && matchesLocation;
+        function filterAndRenderCompanies() {
+            const search = document.getElementById('companySearchBar').value.toLowerCase();
+            const loc = document.getElementById('companyLocationFilter').value.toLowerCase();
+            companyCurrentData = companiesData.filter(c => {
+                const matchSearch = !search || Object.values(c).some(v => v && v.toString().toLowerCase().includes(search));
+                const matchLoc = !loc ||
+                    (c.location && c.location.toLowerCase().includes(loc)) ||
+                    (loc === 'kanto' && ['tokyo', 'kanagawa', 'ibaraki', 'aichi'].some(l => c.location.toLowerCase().includes(l))) ||
+                    (loc === 'kansai' && ['osaka', 'kyoto', 'hyogo'].some(l => c.location.toLowerCase().includes(l)));
+                return matchSearch && matchLoc;
             });
-            
-            // Reset sort when filtering
-            currentSortColumn = null;
-            updateSortIcons();
-            renderCompanies(currentData);
+            companyCurrentSortColumn = null;
+            updateCompanySortIcons();
+            renderCompanies(companyCurrentData);
         }
 
-        // Event Listeners
+        // ---------- UNIVERSITIES DATA & LOGIC ----------
+        const uniData = [
+            { name: "University of Tokyo", type: "National", prefecture: "Tokyo", faculty: "Graduate School of Engineering", department: "Mechano-Informatics", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "Kyoto University", type: "National", prefecture: "Kyoto", faculty: "Graduate School of Engineering", department: "Micro Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "Institute of Science Tokyo (Tokyo Tech)", type: "National", prefecture: "Tokyo", faculty: "School of Engineering", department: "Systems and Control", language: "EN / JP", tuition: "6,35,400", tuitionNum: 635400, rating: "Top Tier (S)" },
+            { name: "Osaka University", type: "National", prefecture: "Osaka", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "Tohoku University", type: "National", prefecture: "Miyagi", faculty: "Graduate School of Engineering", department: "Robotics", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "Nagoya University", type: "National", prefecture: "Aichi", faculty: "Graduate School of Engineering", department: "Micro-Nano Systems", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "Kyushu University", type: "National", prefecture: "Fukuoka", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "Hokkaido University", type: "National", prefecture: "Hokkaido", faculty: "Graduate School of Information Science", department: "Systems and Robotics", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "University of Tsukuba", type: "National", prefecture: "Ibaraki", faculty: "Graduate School of Science and Technology", department: "Intelligent Interaction", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Kobe University", type: "National", prefecture: "Hyogo", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Hiroshima University", type: "National", prefecture: "Hiroshima", faculty: "Graduate School of Advanced Science", department: "System Cybernetics", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Chiba University", type: "National", prefecture: "Chiba", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Kanazawa University", type: "National", prefecture: "Ishikawa", faculty: "Graduate School of Natural Science", department: "Mechanical Science", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Okayama University", type: "National", prefecture: "Okayama", faculty: "Graduate School of Natural Science", department: "Industrial and Mechanical Systems", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Kumamoto University", type: "National", prefecture: "Kumamoto", faculty: "Graduate School of Science and Technology", department: "Mechanical Systems", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Niigata University", type: "National", prefecture: "Niigata", faculty: "Graduate School of Science and Technology", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Shizuoka University", type: "National", prefecture: "Shizuoka", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Saitama University", type: "National", prefecture: "Saitama", faculty: "Graduate School of Science and Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Shinshu University", type: "National", prefecture: "Nagano", faculty: "Graduate School of Science and Technology", department: "Machinery and Robotics", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Ibaraki University", type: "National", prefecture: "Ibaraki", faculty: "Graduate School of Science and Engineering", department: "Mechanical Systems", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Utsunomiya University", type: "National", prefecture: "Tochigi", faculty: "Graduate School of Regional Development", department: "Mechanical Engineering", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Gunma University", type: "National", prefecture: "Gunma", faculty: "Graduate School of Science and Technology", department: "Mechanical Engineering", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Toyohashi University of Technology", type: "National", prefecture: "Aichi", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Nagaoka University of Technology", type: "National", prefecture: "Niigata", faculty: "Graduate School of Engineering", department: "Mechanical and Control", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Kyushu Institute of Technology", type: "National", prefecture: "Fukuoka", faculty: "Graduate School of Life Science and Systems", department: "Human Intelligence Systems", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Nagoya Institute of Technology", type: "National", prefecture: "Aichi", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Univ. of Electro-Communications", type: "National", prefecture: "Tokyo", faculty: "Graduate School of Informatics and Engineering", department: "Mechanical Systems", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Tokyo Univ. of Agriculture and Technology", type: "National", prefecture: "Tokyo", faculty: "Graduate School of Engineering", department: "Mechanical Systems", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Kyoto Institute of Technology", type: "National", prefecture: "Kyoto", faculty: "Graduate School of Science and Technology", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Muroran Institute of Technology", type: "National", prefecture: "Hokkaido", faculty: "Graduate School of Engineering", department: "Mechanical and Aerospace", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Tokyo Metropolitan University", type: "Public", prefecture: "Tokyo", faculty: "Graduate School of Systems Design", department: "Mechanical Systems", language: "EN / JP", tuition: "5,20,800", tuitionNum: 520800, rating: "Top Tier (S)" },
+            { name: "Osaka Metropolitan University", type: "Public", prefecture: "Osaka", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Top Tier (S)" },
+            { name: "Kochi University of Technology", type: "Public", prefecture: "Kochi", faculty: "Graduate School of Engineering", department: "Intelligent Mechanical Engineering", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "University of Hyogo", type: "Public", prefecture: "Hyogo", faculty: "Graduate School of Engineering", department: "Mechanical and Materials", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "University of Aizu", type: "Public", prefecture: "Fukushima", faculty: "Graduate School of Computer and Information Systems", department: "Information Systems (Robotics Lab)", language: "EN", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Hiroshima City University", type: "Public", prefecture: "Hiroshima", faculty: "Graduate School of Information Science", department: "Sensing and Robotics", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "University of Kitakyushu", type: "Public", prefecture: "Fukuoka", faculty: "Graduate School of Environmental Engineering", department: "Information and Media", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Toyama Prefectural University", type: "Public", prefecture: "Toyama", faculty: "Graduate School of Engineering", department: "Mechanical Systems", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Akita Prefectural University", type: "Public", prefecture: "Akita", faculty: "Graduate School of Systems Science", department: "Machine Intelligence", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Iwate Prefectural University", type: "Public", prefecture: "Iwate", faculty: "Graduate School of Software and Information", department: "AI and Robotics", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Maebashi Institute of Technology", type: "Public", prefecture: "Gunma", faculty: "Graduate School of Engineering", department: "Systems Information", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Sanyo-Onoda City University", type: "Public", prefecture: "Yamaguchi", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Shiga Prefectural University", type: "Public", prefecture: "Shiga", faculty: "Graduate School of Engineering", department: "Mechanical Systems", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Okayama Prefectural University", type: "Public", prefecture: "Okayama", faculty: "Graduate School of Information Engineering", department: "Information and Systems", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Future University Hakodate", type: "Public", prefecture: "Hokkaido", faculty: "Graduate School of Systems Information", department: "Complex Systems (Robotics)", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Sapporo City University", type: "Public", prefecture: "Hokkaido", faculty: "Graduate School of Design", department: "Human-Robot Interaction", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Miyagi University", type: "Public", prefecture: "Miyagi", faculty: "Graduate School of Project Design", department: "Information Design", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Aichi Prefectural University", type: "Public", prefecture: "Aichi", faculty: "Graduate School of Information Science", department: "Information Science (AI/Robotics)", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Yokohama City University", type: "Public", prefecture: "Kanagawa", faculty: "Graduate School of Data Science", department: "Data Science (AI/ML/Vision)", language: "EN / JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Highly Competitive (A)" },
+            { name: "Suwa Tokyo University of Science", type: "Public", prefecture: "Nagano", faculty: "Graduate School of Engineering", department: "Applied Information and Robotics", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Chitose Institute of Science and Technology", type: "Public", prefecture: "Hokkaido", faculty: "Graduate School of Science and Technology", department: "Applied Science (Mechatronics)", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Advanced Institute of Industrial Technology", type: "Public", prefecture: "Tokyo", faculty: "Graduate School of Industrial Technology", department: "Information Architecture (Robot Dev)", language: "JP", tuition: "5,20,800", tuitionNum: 520800, rating: "Competitive (B)" },
+            { name: "Nagoya City University", type: "Public", prefecture: "Aichi", faculty: "Graduate School of Design and Architecture", department: "Information and Robotics", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Competitive (B)" },
+            { name: "Kyoto Prefectural University", type: "Public", prefecture: "Kyoto", faculty: "Graduate School of Life and Environmental Sciences", department: "Biomimetics", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Prefectural University of Kumamoto", type: "Public", prefecture: "Kumamoto", faculty: "Graduate School of Environmental and Symbiotic Sci", department: "Environmental Systems (Sensors)", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Prefectural University of Hiroshima", type: "Public", prefecture: "Hiroshima", faculty: "Graduate School of Comprehensive Scientific Research", department: "Information Science", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Shizuoka University of Art and Culture", type: "Public", prefecture: "Shizuoka", faculty: "Graduate School of Design", department: "Interaction Design (Robotics)", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Ishikawa Prefectural University", type: "Public", prefecture: "Ishikawa", faculty: "Graduate School of Bioresources and Env Sciences", department: "Bio-Robotics / Agri-Tech", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Fukui Prefectural University", type: "Public", prefecture: "Fukui", faculty: "Graduate School of Economic and Bioresource Sciences", department: "Ocean / Bio-Robotics", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Kanazawa College of Art", type: "Public", prefecture: "Ishikawa", faculty: "Graduate School of Art", department: "Product Design (Industrial Robotics)", language: "JP", tuition: "5,35,800", tuitionNum: 535800, rating: "Accessible (C)" },
+            { name: "Waseda University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Fundamental Sci and Eng", department: "Modern Mechanical Engineering", language: "EN / JP", tuition: "12,50,000", tuitionNum: 1250000, rating: "Top Tier (S)" },
+            { name: "Keio University", type: "Private", prefecture: "Kanagawa", faculty: "Graduate School of Science and Technology", department: "Integrated Design Engineering", language: "EN / JP", tuition: "13,50,000", tuitionNum: 1350000, rating: "Top Tier (S)" },
+            { name: "Ritsumeikan University", type: "Private", prefecture: "Shiga", faculty: "Graduate School of Information Science and Eng", department: "Advanced Information Sci (Robotics)", language: "EN / JP", tuition: "10,50,000", tuitionNum: 1050000, rating: "Highly Competitive (A)" },
+            { name: "Tokyo Denki University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Engineering", department: "Robotics and Mechanical Engineering", language: "JP", tuition: "12,00,000", tuitionNum: 1200000, rating: "Competitive (B)" },
+            { name: "Shibaura Institute of Technology", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Engineering and Science", department: "Mechanical Control Systems", language: "EN / JP", tuition: "12,05,000", tuitionNum: 1205000, rating: "Highly Competitive (A)" },
+            { name: "Kansai University", type: "Private", prefecture: "Osaka", faculty: "Graduate School of Science and Engineering", department: "Mechatronics", language: "EN / JP", tuition: "11,50,000", tuitionNum: 1150000, rating: "Competitive (B)" },
+            { name: "Kindai University", type: "Private", prefecture: "Osaka", faculty: "Graduate School of Systems Engineering", department: "Future Robotics", language: "JP", tuition: "12,00,000", tuitionNum: 1200000, rating: "Competitive (B)" },
+            { name: "Doshisha University", type: "Private", prefecture: "Kyoto", faculty: "Graduate School of Science and Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "11,00,000", tuitionNum: 1100000, rating: "Highly Competitive (A)" },
+            { name: "Meiji University", type: "Private", prefecture: "Kanagawa", faculty: "Graduate School of Science and Technology", department: "Mechanical Engineering", language: "EN / JP", tuition: "11,50,000", tuitionNum: 1150000, rating: "Highly Competitive (A)" },
+            { name: "Chuo University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Science and Engineering", department: "Precision Mechanics", language: "EN / JP", tuition: "12,00,000", tuitionNum: 1200000, rating: "Highly Competitive (A)" },
+            { name: "Hosei University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Science and Engineering", department: "Mechanical Engineering", language: "EN / JP", tuition: "12,50,000", tuitionNum: 1250000, rating: "Competitive (B)" },
+            { name: "Sophia University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Science and Technology", department: "Engineering and Applied Sciences", language: "EN / JP", tuition: "13,00,000", tuitionNum: 1300000, rating: "Highly Competitive (A)" },
+            { name: "Tokyo City University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Integrative Science and Engineering", department: "Mechanical Systems Engineering", language: "JP", tuition: "11,50,000", tuitionNum: 1150000, rating: "Competitive (B)" },
+            { name: "Kogakuin University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "12,50,000", tuitionNum: 1250000, rating: "Competitive (B)" },
+            { name: "Nippon Institute of Technology", type: "Private", prefecture: "Saitama", faculty: "Graduate School of Engineering", department: "Robotics Engineering", language: "JP", tuition: "13,00,000", tuitionNum: 1300000, rating: "Accessible (C)" },
+            { name: "Tamagawa University", type: "Private", prefecture: "Tokyo", faculty: "Graduate School of Engineering", department: "Engineering Design (Robotics)", language: "JP", tuition: "13,50,000", tuitionNum: 1350000, rating: "Accessible (C)" },
+            { name: "Kanagawa University", type: "Private", prefecture: "Kanagawa", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "11,00,000", tuitionNum: 1100000, rating: "Competitive (B)" },
+            { name: "Chiba Institute of Technology", type: "Private", prefecture: "Chiba", faculty: "Graduate School of Engineering", department: "Future Robotics", language: "JP", tuition: "12,00,000", tuitionNum: 1200000, rating: "Competitive (B)" },
+            { name: "Saitama Institute of Technology", type: "Private", prefecture: "Saitama", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "11,50,000", tuitionNum: 1150000, rating: "Accessible (C)" },
+            { name: "Aichi Institute of Technology", type: "Private", prefecture: "Aichi", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "12,00,000", tuitionNum: 1200000, rating: "Competitive (B)" },
+            { name: "Daido University", type: "Private", prefecture: "Aichi", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "11,00,000", tuitionNum: 1100000, rating: "Accessible (C)" },
+            { name: "Toyota Technological Institute", type: "Private", prefecture: "Aichi", faculty: "Graduate School of Engineering", department: "Mechanical Systems", language: "EN / JP", tuition: "13,50,000", tuitionNum: 1350000, rating: "Highly Competitive (A)" },
+            { name: "Osaka Institute of Technology", type: "Private", prefecture: "Osaka", faculty: "Graduate School of Robotics and Design", department: "Robotics and Design", language: "JP", tuition: "11,50,000", tuitionNum: 1150000, rating: "Competitive (B)" },
+            { name: "Fukuoka Institute of Technology", type: "Private", prefecture: "Fukuoka", faculty: "Graduate School of Engineering", department: "Intelligent Mechanical Engineering", language: "JP", tuition: "11,00,000", tuitionNum: 1100000, rating: "Accessible (C)" },
+            { name: "Kyushu Sangyo University", type: "Private", prefecture: "Fukuoka", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "10,50,000", tuitionNum: 1050000, rating: "Accessible (C)" },
+            { name: "Kyoto Sangyo University", type: "Private", prefecture: "Kyoto", faculty: "Graduate School of Advanced Technology", department: "Information Systems (Robotics)", language: "JP", tuition: "11,00,000", tuitionNum: 1100000, rating: "Accessible (C)" },
+            { name: "Ryukoku University", type: "Private", prefecture: "Kyoto", faculty: "Graduate School of Science and Technology", department: "Mechanical and Systems Engineering", language: "JP", tuition: "11,50,000", tuitionNum: 1150000, rating: "Competitive (B)" },
+            { name: "Kanto Gakuin University", type: "Private", prefecture: "Kanagawa", faculty: "Graduate School of Engineering", department: "Mechanical Engineering", language: "JP", tuition: "10,00,000", tuitionNum: 1000000, rating: "Accessible (C)" },
+            { name: "Chukyo University", type: "Private", prefecture: "Aichi", faculty: "Graduate School of Engineering", department: "Mechanical and Systems Engineering", language: "JP", tuition: "11,50,000", tuitionNum: 1150000, rating: "Competitive (B)" },
+            { name: "Meijo University", type: "Private", prefecture: "Aichi", faculty: "Graduate School of Science and Technology", department: "Mechatronics Engineering", language: "JP", tuition: "12,00,000", tuitionNum: 1200000, rating: "Competitive (B)" }
+        ];
+
+        let uniCurrentSortColumn = null;
+        let uniCurrentSortDirection = 'asc';
+        let uniCurrentData = [...uniData];
+
+        function getTypeBadge(type) {
+            const map = { 'National': 'badge-national', 'Public': 'badge-public', 'Private': 'badge-private' };
+            return `<span class="badge ${map[type] || 'badge-national'}">${type}</span>`;
+        }
+        function getLangBadge(lang) {
+            const map = { 'EN': 'badge-en', 'JP': 'badge-jp', 'EN / JP': 'badge-enjp' };
+            return `<span class="badge ${map[lang] || 'badge-enjp'}">${lang}</span>`;
+        }
+        function getRatingBadge(rating) {
+            const cls = rating.includes('S') ? 'badge-s' : rating.includes('A') ? 'badge-a' : rating.includes('B') ? 'badge-b' : 'badge-c';
+            return `<span class="badge ${cls}">${rating}</span>`;
+        }
+
+        function renderUnis(data) {
+            const tbody = document.querySelector('#uniTable tbody');
+            tbody.innerHTML = '';
+            const noRes = document.getElementById('uniNoResults');
+            if (data.length === 0) {
+                noRes.classList.remove('hidden');
+                document.getElementById('uniTable').classList.add('hidden');
+                return;
+            }
+            noRes.classList.add('hidden');
+            document.getElementById('uniTable').classList.remove('hidden');
+            data.forEach(u => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="font-semibold text-gray-900">${u.name}</td>
+                    <td>${getTypeBadge(u.type)}</td>
+                    <td>${u.prefecture}</td>
+                    <td>${u.faculty}</td>
+                    <td>${u.department}</td>
+                    <td>${getLangBadge(u.language)}</td>
+                    <td class="font-mono text-gray-700">${u.tuition}</td>
+                    <td>${getRatingBadge(u.rating)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function sortUnis(column) {
+            if (uniCurrentSortColumn === column) {
+                uniCurrentSortDirection = uniCurrentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                uniCurrentSortColumn = column;
+                uniCurrentSortDirection = 'asc';
+            }
+            uniCurrentData.sort((a, b) => {
+                let aVal = a[column];
+                let bVal = b[column];
+                if (typeof aVal === 'string') {
+                    aVal = aVal.toLowerCase();
+                    bVal = bVal.toLowerCase();
+                }
+                if (aVal < bVal) return uniCurrentSortDirection === 'asc' ? -1 : 1;
+                if (aVal > bVal) return uniCurrentSortDirection === 'asc' ? 1 : -1;
+                return 0;
+            });
+            renderUnis(uniCurrentData);
+            updateUniSortIcons();
+        }
+
+        function updateUniSortIcons() {
+            document.querySelectorAll('#uniTable th .sort-icon').forEach(i => i.textContent = '');
+            if (uniCurrentSortColumn) {
+                const h = document.querySelector(`#uniTable th[data-sort-by="${uniCurrentSortColumn}"] .sort-icon`);
+                if (h) h.textContent = uniCurrentSortDirection === 'asc' ? '▲' : '▼';
+            }
+        }
+
+        function populateUniPrefectures() {
+            const sel = document.getElementById('uniPrefectureFilter');
+            const prefs = [...new Set(uniData.map(u => u.prefecture))].sort();
+            prefs.forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p;
+                opt.textContent = p;
+                sel.appendChild(opt);
+            });
+        }
+
+        function updateUniStats(data) {
+            document.getElementById('uniStatTotal').textContent = data.length;
+            document.getElementById('uniStatNational').textContent = data.filter(u => u.type === 'National').length;
+            document.getElementById('uniStatPublic').textContent = data.filter(u => u.type === 'Public').length;
+            document.getElementById('uniStatPrivate').textContent = data.filter(u => u.type === 'Private').length;
+        }
+
+        function filterAndRenderUnis() {
+            const search = document.getElementById('uniSearchBar').value.toLowerCase();
+            const type = document.getElementById('uniTypeFilter').value;
+            const pref = document.getElementById('uniPrefectureFilter').value;
+            const lang = document.getElementById('uniLanguageFilter').value;
+            const rating = document.getElementById('uniRatingFilter').value;
+            uniCurrentData = uniData.filter(u => {
+                const matchSearch = !search ||
+                    u.name.toLowerCase().includes(search) ||
+                    u.faculty.toLowerCase().includes(search) ||
+                    u.department.toLowerCase().includes(search) ||
+                    u.prefecture.toLowerCase().includes(search);
+                const matchType = !type || u.type === type;
+                const matchPref = !pref || u.prefecture === pref;
+                const matchLang = !lang || u.language === lang;
+                const matchRating = !rating || u.rating === rating;
+                return matchSearch && matchType && matchPref && matchLang && matchRating;
+            });
+            uniCurrentSortColumn = null;
+            updateUniSortIcons();
+            renderUnis(uniCurrentData);
+            updateUniStats(uniCurrentData);
+        }
+
+        // ---------- TAB SWITCHING ----------
+        function switchTab(tab) {
+            const companiesSection = document.getElementById('companiesSection');
+            const universitiesSection = document.getElementById('universitiesSection');
+            const tabComp = document.getElementById('tabCompanies');
+            const tabUni = document.getElementById('tabUniversities');
+            if (tab === 'companies') {
+                companiesSection.classList.remove('section-hidden');
+                universitiesSection.classList.add('section-hidden');
+                tabComp.classList.add('active');
+                tabUni.classList.remove('active');
+            } else {
+                companiesSection.classList.add('section-hidden');
+                universitiesSection.classList.remove('section-hidden');
+                tabComp.classList.remove('active');
+                tabUni.classList.add('active');
+            }
+        }
+
+        // ---------- INITIALIZATION ----------
         document.addEventListener('DOMContentLoaded', () => {
-            populateLocationFilter();
-            renderCompanies(companiesData);
-
-            document.querySelectorAll('th[data-sort-by]').forEach(header => {
-                header.addEventListener('click', () => {
-                    sortCompanies(header.dataset.sortBy);
-                });
+            // Companies initialization
+            populateCompanyLocationFilter();
+            renderCompanies(companyCurrentData);
+            document.querySelectorAll('#companyTable th[data-sort-by]').forEach(h => {
+                h.addEventListener('click', () => sortCompanies(h.dataset.sortBy));
             });
+            document.getElementById('companySearchBar').addEventListener('input', filterAndRenderCompanies);
+            document.getElementById('companyLocationFilter').addEventListener('change', filterAndRenderCompanies);
 
-            document.getElementById('searchBar').addEventListener('input', filterAndRender);
-            document.getElementById('locationFilter').addEventListener('change', filterAndRender);
+            // Universities initialization
+            populateUniPrefectures();
+            renderUnis(uniCurrentData);
+            updateUniStats(uniCurrentData);
+            document.querySelectorAll('#uniTable th[data-sort-by]').forEach(h => {
+                h.addEventListener('click', () => sortUnis(h.dataset.sortBy));
+            });
+            document.getElementById('uniSearchBar').addEventListener('input', filterAndRenderUnis);
+            document.getElementById('uniTypeFilter').addEventListener('change', filterAndRenderUnis);
+            document.getElementById('uniPrefectureFilter').addEventListener('change', filterAndRenderUnis);
+            document.getElementById('uniLanguageFilter').addEventListener('change', filterAndRenderUnis);
+            document.getElementById('uniRatingFilter').addEventListener('change', filterAndRenderUnis);
         });
     </script>
 </body>
