@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Japan Robotics & Company Database</title>
+    <title>Japan Robotics &amp; Company Database</title>
     <style>
         :root {
             --bg-primary: #0a0e17;
@@ -303,6 +303,9 @@
             font-size: 0.82rem;
             min-width: 1800px;
         }
+        #table-container-companies table {
+            min-width: 2400px;
+        }
         thead {
             position: sticky;
             top: 0;
@@ -397,6 +400,17 @@
             padding: 0.1rem 0;
         }
         .prof-tag strong { color: var(--text-primary); }
+        .role-tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            padding: 0.1rem 0.45rem;
+            margin: 0.1rem 0.15rem 0.1rem 0;
+            border-radius: 4px;
+            background: rgba(139, 92, 246, 0.12);
+            color: #c4b5fd;
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            line-height: 1.4;
+        }
         .empty-state {
             text-align: center;
             padding: 3rem 1rem;
@@ -592,7 +606,7 @@
                             <th data-sort="university">University</th>
                             <th data-sort="type">Type</th>
                             <th data-sort="tier">Tier</th>
-                            <th>Graduate School & Dept</th>
+                            <th>Graduate School &amp; Dept</th>
                             <th>Robotics Lab</th>
                             <th>Key Professors</th>
                             <th>Program URL</th>
@@ -617,7 +631,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <input type="text" id="search-companies" placeholder="Search by name, location, focus, or funding..." autocomplete="off">
+                <input type="text" id="search-companies" placeholder="Search by name, location, category, key roles, or email..." autocomplete="off">
             </div>
             <div class="filter-group">
                 <select id="filter-company-english">
@@ -640,6 +654,7 @@
                             <th data-sort="location">Location</th>
                             <th>Website</th>
                             <th data-sort="focus">Focus</th>
+                            <th>Key Roles &amp; Requirements</th>
                             <th data-sort="funding">Funding</th>
                             <th data-sort="englishFriendly">English Friendly</th>
                             <th>Career Page</th>
@@ -765,24 +780,54 @@
     ];
 
     const companiesData = [
+        // ===== NEWLY ADDED: Industrial Robotics & Factory Automation =====
+        { name: "FANUC Corporation", location: "Oshino-mura, Minamitsuru-gun, Yamanashi", website: "https://www.fanuc.co.jp/", focus: "Industrial Robotics & Factory Automation", funding: "N/A", englishFriendly: "Likely (Global operations)", careerPage: "https://www.fanuc.co.jp/ja/recruit/", contactEmail: "recruit@fanuc.co.jp", keyRoles: "Robot Motion Control Software Engineer (C/C++), Servo Control Algorithm Developer, Embedded Computer Vision, Functional Safety System Architect" },
+        { name: "Yaskawa Electric Corporation", location: "Kitakyushu, Fukuoka / Iruma, Saitama", website: "https://www.yaskawa.co.jp/", focus: "Industrial Robotics & Factory Automation", funding: "N/A", englishFriendly: "Likely (Global operations)", careerPage: "https://www.yaskawa.co.jp/recruitment", contactEmail: "saiyo@yaskawa.co.jp", keyRoles: "Motion Control Firmware Engineer, Real-Time OS (RTOS) Specialist, Kinematic/Dynamic CAE Analyst, Digital Twin Simulation Engineer" },
+        { name: "Kawasaki Heavy Industries (Precision Machinery & Robot)", location: "Kobe, Hyogo / Minato-ku, Tokyo", website: "https://www.khi.co.jp/", focus: "Industrial Robotics & Factory Automation", funding: "N/A", englishFriendly: "Likely (Global operations)", careerPage: "https://www.khi.co.jp/recruit/", contactEmail: "khi-recruit@khi.co.jp", keyRoles: "Robot System Integration Engineer, ROS/Linux Controller Developer, Industrial Sequence/PLC Programmer, Functional Safety Certified Designer" },
+        { name: "DENSO WAVE INCORPORATED", location: "Agui-cho, Chita-gun, Aichi / Minato-ku, Tokyo / Osaka", website: "https://www.denso-wave.com/", focus: "Industrial Robotics & Factory Automation", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.denso-wave.com/ja/company/recruit/", contactEmail: "saiyo@denso-wave.com", keyRoles: "Small-Arm Trajectory Planning Engineer, ORiN Middleware Infrastructure Developer, Edge AI Computer Vision Specialist, Industrial Fieldbus Engineer" },
+        { name: "Mitsubishi Electric Corporation (FA Systems Group)", location: "Chiyoda-ku, Tokyo / Nagoya, Aichi", website: "https://www.mitsubishielectric.co.jp/", focus: "Industrial Robotics & Factory Automation", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.mitsubishielectric.co.jp/jinji/", contactEmail: "saiyo.fa@mitsubishielectric.co.jp", keyRoles: "Robot Interpolation Algorithm Engineer, CC-Link IE TSN Industrial Networking Developer, Embedded Real-Time Controller Architect" },
+        { name: "Daifuku Co., Ltd.", location: "Osaka, Osaka / Hino-cho, Gamo-gun, Shiga", website: "https://www.daifuku.com/", focus: "Industrial Robotics & Logistics Automation", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.daifuku.com/jp/recruit/", contactEmail: "daifuku-recruit@daifuku.co.jp", keyRoles: "Fleet Management Software Engineer (Java/C++), Warehouse AGV Navigation & Dispatching Algorithm Developer, Industrial Automation PLC Engineer" },
+        { name: "Yamaha Motor Co., Ltd. (Robotics Operations)", location: "Iwata, Shizuoka / Hamamatsu, Shizuoka", website: "https://global.yamaha-motor.com/", focus: "Industrial Robotics & Factory Automation", funding: "N/A", englishFriendly: "Likely (Global operations)", careerPage: "https://global.yamaha-motor.com/jp/recruitment/", contactEmail: "ym-recruit@yamaha-motor.co.jp", keyRoles: "SCARA High-Speed Motion Control Engineer, Optical Inspection Vision Engineer, Servo Inverter Hardware Designer, Embedded Linux Firmware Engineer" },
+        { name: "Nachi-Fujikoshi Corp.", location: "Minato-ku, Tokyo / Toyama, Toyama", website: "https://www.nachi-fujikoshi.co.jp/", focus: "Industrial Robotics & Factory Automation", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.nachi-fujikoshi.co.jp/saiyo/", contactEmail: "saiyo@nachi-fujikoshi.co.jp", keyRoles: "Industrial Spot-Welding Application Specialist, Actuator Servo Control Engineer, Structural FEA/CAE Analyst, Turnkey Robotics Systems Engineer" },
+
+        // ===== NEWLY ADDED: Precision Components, Medical & Surgical Robotics =====
+        { name: "Nabtesco Corporation (Precision Reduction Gear)", location: "Chiyoda-ku, Tokyo / Tsu, Mie", website: "https://www.nabtesco.com/", focus: "Precision Robotics Components & Reduction Gears", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.nabtesco.com/recruit/", contactEmail: "jinji@nabtesco.com", keyRoles: "Mechanical Gear Design Engineer, Tribology & Materials Research Scientist, High-Torque Actuator Mechanical Architect, Sensorized Smart Reducer Developer" },
+        { name: "Medicaroid Corporation", location: "Kobe, Hyogo / Akashi, Hyogo", website: "https://www.medicaroid.com/", focus: "Medical & Surgical Robotics", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.medicaroid.com/recruit/", contactEmail: "Contact Form: https://www.medicaroid.com/recruit/contact.php", keyRoles: "Surgical Robotic Arm Control Engineer, Precision Medical Instrument Mechanical Designer, Real-Time Low-Latency Software Developer, Regulatory Affairs & Quality Assurance (RA/QA) Specialist" },
+        { name: "Riverfield Inc.", location: "Minato-ku & Shinjuku-ku, Tokyo", website: "https://www.riverfieldinc.com/", focus: "Medical & Surgical Robotics", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.riverfieldinc.com/", contactEmail: "info@riverfieldinc.com", keyRoles: "Pneumatic Micro-Servo Valve Control Engineer, Bilateral Haptic Feedback Control Architect, Precision Surgical Tool Mechanism Designer, Medical Safety Verification Engineer" },
+        { name: "CYBERDYNE Inc.", location: "Tsukuba, Ibaraki", website: "https://www.cyberdyne.jp/", focus: "Medical Robotics & Wearable Exoskeletons", funding: "N/A", englishFriendly: "Likely (Global business)", careerPage: "https://www.cyberdyne.jp/company/recruit/", contactEmail: "hr_entry@cyberdyne.jp / contact@cyberdyne.jp", keyRoles: "Bio-Electrical Potential Signal Processing Engineer, Exoskeleton Assistive Mechanism Designer, Wearable Medical Sensor Circuit Engineer, Clinical Field Verification Specialist" },
+
+        // ===== NEWLY ADDED: Logistics, AMRs & Inspection =====
+        { name: "Rapyuta Robotics Co., Ltd.", location: "Koto-ku, Tokyo", website: "https://www.rapyuta-robotics.com/", focus: "Logistics Automation & Autonomous Mobile Robots", funding: "N/A", englishFriendly: "Yes (Team from over 20 countries)", careerPage: "https://www.rapyuta-robotics.com/careers/", contactEmail: "talent@rapyuta-robotics.com / contact@rapyuta-robotics.com", keyRoles: "Robotics Systems Integration Engineer (C++/Python/ROS), SLAM & Navigation Specialist, Cloud Infrastructure Engineer (Docker/k8s), Product Manager - ASRS" },
+        { name: "LexxPluss, Inc.", location: "Kawasaki, Kanagawa", website: "https://lexxpluss.com/", focus: "Logistics Automation & Autonomous Mobile Robots", funding: "N/A", englishFriendly: "Likely (English-speaking team)", careerPage: "https://lexxpluss.com/career/", contactEmail: "pr@lexxpluss.com / careers@lexxpluss.com", keyRoles: "Autonomous Navigation Software Engineer (ROS 2 / Nav2), 3D-LiDAR SLAM Algorithm Specialist, Mobile Chassis Mechanical Design Engineer, System Reliability Engineer" },
+        { name: "hibot Corporation", location: "Shinagawa-ku, Tokyo", website: "https://hibot.co.jp/", focus: "Infrastructure Inspection & Extreme-Environment Robotics", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://hibot.co.jp/recruit/", contactEmail: "recruit@hibot.co.jp / Contact Form: https://hibot.co.jp/contact/", keyRoles: "Mechanical Engineer - Product Design (Linkages & Extreme Enclosures), Firmware Engineer (C / OS-less bare-metal drivers), Electrical & PCBA Design Engineer" },
+        { name: "ugo, Inc.", location: "Chiyoda-ku, Tokyo", website: "https://corp.ugo.plus/", focus: "Avatar Robotics & Facility Security/Inspection", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://corp.ugo.plus/recruit/", contactEmail: "recruit@ugo.plus", keyRoles: "Autonomous Navigation Engineer (ROS 2 / SLAM / Nav2), Dual-Arm Motion Planning & Manipulation Engineer, Embedded Firmware Engineer (STM32/ESP32), MLOps/RoboOps Engineer" },
+        { name: "SEQSENSE Inc.", location: "Chiyoda-ku, Tokyo", website: "https://www.seqsense.com/", focus: "Autonomous Mobile Robots & Security", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.seqsense.com/careers/", contactEmail: "recruit@seqsense.com / info@seqsense.com", keyRoles: "3D Point-Cloud SLAM Algorithm Developer, Cloud Backend Engineer (Go/Python/AWS), Edge Point-Cloud Processing Specialist (C++), Optomechanical LiDAR Hardware Engineer" },
+
+        // ===== NEWLY ADDED: Physical AI, Space & Teleoperation =====
+        { name: "Preferred Networks, Inc. (PFN)", location: "Chiyoda-ku, Tokyo", website: "https://www.preferred.jp/", focus: "Physical AI & Foundation Models", funding: "N/A", englishFriendly: "Likely (Global research)", careerPage: "https://www.preferred.jp/en/careers/", contactEmail: "hr@preferred.jp / Contact Form: https://www.preferred.jp/en/contact", keyRoles: "Research Scientist - Physical AI & Robotics, Physics Engine & Simulation Developer, Foundation Model (VLA) Specialist, Supercomputing Cluster Infrastructure Engineer" },
+        { name: "GITAI Japan, Inc.", location: "Meguro-ku & Ota-ku, Tokyo", website: "https://gitai.tech/", focus: "Space Robotics & Autonomous Manipulation", funding: "N/A", englishFriendly: "Likely (Global mission)", careerPage: "https://gitai.tech/careers/", contactEmail: "info@gitai.tech / careers@gitai.tech", keyRoles: "Space Mechanism Design Engineer (Thermal Vacuum / Rad-Hardening), Avionics Embedded Software Engineer, Time-Delay Compensated Supervisory Control Architect" },
+        { name: "Telexistence Inc.", location: "Chuo-ku, Tokyo", website: "https://tx-inc.com/", focus: "Retail Robotics & Teleoperation", funding: "N/A", englishFriendly: "Likely (Seeks global professionals)", careerPage: "https://tx-inc.com/en/careers/", contactEmail: "careers@tx-inc.com / info@tx-inc.com", keyRoles: "Robotic Foundation Model Researcher, Senior Backend Systems Engineer (C#/.NET/gRPC/MQTT), Retail Hardware Mass-Production Designer, Multi-Axis Motion Control Engineer" },
+
+        // ===== NEWLY ADDED: Manipulation, Food, Heavy Machinery, Open Source, Companion =====
+        { name: "Thinker Co., Ltd.", location: "Nishi-ku, Osaka, Osaka", website: "N/A", focus: "Intelligent Manipulation & Reflex Sensor Hands", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://job.persona-ats.com/ja/thinker-robotics", contactEmail: "recruit@thinker-robotics.co.jp / info@thinker-robotics.co.jp", keyRoles: "Embedded AI Engineer (Proximity Signal Processing & Edge Inference), Reflex Feedback Control Algorithm Engineer, Field Application Engineer (FAE), Mechanism Design Engineer" },
+        { name: "Connected Robotics Inc.", location: "Koganei, Tokyo / Minamisoma, Fukushima", website: "https://connected-robotics.com/", focus: "Food Service & Kitchen Automation Robotics", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://connected-robotics.com/en/career/", contactEmail: "Application Portal via HERP / Contact Form: https://connected-robotics.com/en/contact/", keyRoles: "Robotics System Integrator (SIer), Computer Vision & Deep Learning Specialist (Deformable Food Items), Manipulator Kinematics & Gripper Hardware Designer" },
+        { name: "DeepX, Inc.", location: "Bunkyo-ku, Tokyo", website: "https://www.deepx.co.jp/", focus: "Heavy Machinery Automation & Autonomous Operations", funding: "N/A", englishFriendly: "Yes (\"No Japanese required\")", careerPage: "https://www.deepx.co.jp/career/", contactEmail: "info@deepx.co.jp", keyRoles: "Heavy Machinery Autonomous Control Engineer (C++/Python), Real-Time Hydraulics Control Specialist, Edge AI Inference Pipeline Architect, Reinforcement Learning Engineer" },
+        { name: "AI Robot Association (AIRoA)", location: "Chiyoda-ku & Minato-ku, Tokyo", website: "https://airoa.org/", focus: "Open-Source AI Robotics Platform", funding: "N/A", englishFriendly: "Likely (Open-source community)", careerPage: "https://airoa.org/", contactEmail: "contact@airoa.org", keyRoles: "Research Scientist (Robotics / VLAs), Open-Source Robotics Framework Core Developer, High-Reliability Electrical Circuit Engineer" },
+        { name: "GROOVE X, Inc.", location: "Chuo-ku, Tokyo", website: "https://groove-x.com/", focus: "Companion Robotics & Affective Computing", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://groove-x.com/en/recruit/", contactEmail: "recruit@groove-x.com / Contact Form: https://groove-x.com/en/contact/", keyRoles: "Firmware Engineer (Embedded Linux / FreeRTOS), Ultra-Dense Precision Mechatronics Design Engineer, Market Quality Assurance (MQA) Engineer" },
+
+        // ===== EXISTING ENTRIES =====
         { name: "Prodrone Co., Ltd.", location: "N/A", website: "https://www.prodrone.com/jp/", focus: "Develops drones and control software.", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.prodrone.com/jp/recruit/", contactEmail: "N/A" },
         { name: "Chinougijutsu Co., Ltd.", location: "Osaka, Osaka", website: "https://chinougijutsu.co.jp/", focus: "Robot technology, Image processing, Cleaning robots, Autonomous vehicle control, AI software, Medical devices", funding: "Established 2007, Capital: ¥75M, Sales: ¥150M", englishFriendly: "Yes (Hires \"Highly-Skilled Foreign Professionals\")", careerPage: "https://chinougijutsu.co.jp/recruit", contactEmail: "info@chinou.co.jp" },
         { name: "Seedea", location: "N/A", website: "https://seedea.jp/", focus: "LSI design, embedded software, and system integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://seedea.jp/recruit/", contactEmail: "N/A" },
         { name: "SAZO Inc.", location: "N/A", website: "https://sazo.tech/", focus: "SCM/Logistics Planning with AIoT-based inventory management", funding: "N/A", englishFriendly: "N/A", careerPage: "https://sazo.tech/join-us/", contactEmail: "N/A" },
         { name: "PDOLE.inc", location: "N/A", website: "https://pdole.com/", focus: "Global management strategy support with an emphasis on \"Globalize AI\"", funding: "N/A", englishFriendly: "N/A", careerPage: "https://pdole.com/careers", contactEmail: "N/A" },
         { name: "Mujin Inc.", location: "Koto, Tokyo", website: "https://mujin-corp.com/", focus: "Intelligent robotics and automation for logistics and industrial applications", funding: "US$85M Series C", englishFriendly: "Likely (Global operations)", careerPage: "https://mujin-corp.com/en/careers/", contactEmail: "info@mujin-corp.com" },
-        { name: "GITAI", location: "N/A", website: "https://gitai.tech/", focus: "Space robotics (satellite servicing, space station tasks, lunar exploration)", funding: "¥4 billion (US$30M) Series B Extension", englishFriendly: "Likely (Global mission)", careerPage: "https://gitai.tech/careers", contactEmail: "N/A" },
-        { name: "Rapyuta Robotics", location: "Koto, Tokyo", website: "https://www.rapyuta-robotics.com/", focus: "Cloud robotics platform, automating \"3D\" jobs (Dirty, Dangerous, Difficult)", funding: "N/A", englishFriendly: "Yes (Team from over 20 countries)", careerPage: "https://www.rapyuta-robotics.com/careers/", contactEmail: "info@rapyuta-robotics.com" },
         { name: "ZMP / ROBO-HI Corporation", location: "N/A", website: "https://www.zmp.co.jp/", focus: "Autonomous driving technology, Multi-vendor robot platform, Industrial & Life Mobility", funding: "N/A", englishFriendly: "Likely (Lists \"Robotics Engineer (EN)\" roles)", careerPage: "https://www.zmp.co.jp/recruit", contactEmail: "N/A" },
         { name: "Tier IV", location: "Nagoya, Aichi", website: "https://tier4.jp/", focus: "Open-source software for self-driving technology", funding: "¥10,985M Series A", englishFriendly: "Likely (Global collaboration)", careerPage: "https://tier4.jp/en/careers/", contactEmail: "careers@tier4.jp" },
-        { name: "GROOVE X", location: "N/A", website: "https://groove-x.com/", focus: "Consumer robotics, home robots (LOVOT)", funding: "N/A", englishFriendly: "Likely (New business field)", careerPage: "https://www.wantedly.com/companies/groove-x", contactEmail: "N/A" },
-        { name: "Telexistence Inc.", location: "Minato, Tokyo", website: "https://tx-inc.com/", focus: "AI-powered robotic solutions for retail and logistics automation", funding: "N/A", englishFriendly: "Likely (Seeks global professionals)", careerPage: "https://tx-inc.com/en/career/", contactEmail: "N/A" },
         { name: "Smile Robotics", location: "N/A", website: "https://smilerobotics.com/", focus: "In-house robotic products for service industries, mobile robot development platform", funding: "N/A", englishFriendly: "Likely (Recruiting interns)", careerPage: "https://smilerobotics.com/recruit", contactEmail: "N/A" },
         { name: "Coarobo GK", location: "N/A", website: "https://coarobo.com/", focus: "Containerized Software Development Environment (SDE) for service robotics and AI", funding: "N/A", englishFriendly: "Unclear", careerPage: "N/A", contactEmail: "info@coarobo.com" },
         { name: "SkyDrive Inc.", location: "N/A", website: "https://en.skydrive2020.com/", focus: "Flying cars and cargo drones", funding: "¥4,064M Series B", englishFriendly: "Likely (Aiming for global launch)", careerPage: "https://en.skydrive2020.com/career", contactEmail: "N/A" },
-        { name: "DeepX", location: "N/A", website: "https://www.deepx.co.jp/", focus: "Robotics system integration, automating any machine", funding: "N/A", englishFriendly: "Yes (\"No Japanese required\")", careerPage: "https://www.deepx.co.jp/en/careers", contactEmail: "N/A" },
         { name: "Flower Robotics", location: "N/A", website: "https://www.flower-robotics.com/", focus: "Design and development of various robots, consumer robotics", funding: "N/A", englishFriendly: "Unclear", careerPage: "N/A (Contact form on website)", contactEmail: "contact@flower-robotics.com" },
-        { name: "Hibot Inc.", location: "N/A", website: "https://www.hibot.co.jp/", focus: "Mobile robotics for industrial inspection and maintenance", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.hibot.co.jp/en/recruit-en/", contactEmail: "N/A" },
         { name: "Kyoto Robotics (3D MEDiA Co., Ltd.)", location: "Kyoto, Kyoto", website: "https://www.kyotorobotics.co.jp/", focus: "3D robot vision systems for industrial use, logistics", funding: "¥800M authorized investment", englishFriendly: "Unclear", careerPage: "https://www.kyotorobotics.co.jp/recruit/", contactEmail: "N/A" },
         { name: "Kudan Inc.", location: "N/A", website: "https://www.kudan.io/", focus: "SLAM technology for AR/VR and autonomous navigation", funding: "N/A", englishFriendly: "Unclear", careerPage: "https://www.kudan.io/careers", contactEmail: "contact@kudan.eu" },
         { name: "Nikko Co.Ltd", location: "N/A", website: "https://www.nikko-company.co.jp/", focus: "General Machinery", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.nikko-company.co.jp/recruit/", contactEmail: "N/A" },
@@ -793,18 +838,13 @@
         { name: "XELA Robotics", location: "N/A", website: "https://www.xelarobotics.com/", focus: "Robotics Innovation, Haptic Technology, Tactile Sensors", funding: "N/A", englishFriendly: "Open to English speakers", careerPage: "https://www.xelarobotics.com/jobs", contactEmail: "job@xelarobotics.com" },
         { name: "SoftBank Robotics", location: "N/A", website: "https://www.softbankrobotics.com/", focus: "Humanoid Robots, Service Robotics (Pepper, Whiz)", funding: "N/A", englishFriendly: "Global company", careerPage: "https://www.softbankrobotics.com/corp/recruit/", contactEmail: "SBRGRP-PR@g.softbank.co.jp" },
         { name: "LeapMind", location: "N/A", website: "https://leapmind.io/", focus: "Compact Deep Learning for Edge Devices", funding: "N/A", englishFriendly: "Business contact available", careerPage: "https://leapmind.io/en/careers/", contactEmail: "business@leapmind.io" },
-        { name: "FANUC", location: "N/A", website: "https://www.fanuc.co.jp/", focus: "Industrial Automation, Robots, CNC, ROBOMACHINEs", funding: "N/A", englishFriendly: "Global company", careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html", contactEmail: "N/A" },
-        { name: "Yaskawa Electric", location: "N/A", website: "https://www.yaskawa-global.com/", focus: "Industrial Robotics Components, Drives, Motion Control", funding: "N/A", englishFriendly: "Global company", careerPage: "https://www.yaskawa-global.com/recruit", contactEmail: "web_mstr@yaskawa.co.jp" },
         { name: "Guide Robotics Inc.", location: "N/A", website: "N/A", focus: "Robotics", funding: "N/A", englishFriendly: "Explicitly \"Only English Required.\"", careerPage: "N/A (Listed on JETRO portal)", contactEmail: "N/A" },
-        { name: "Connected Robotics", location: "Koganei, Tokyo", website: "https://connected-robotics.com/", focus: "Food industry robotics (OctoChef, automated dishwasher robots)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://connected-robotics.com/recruit/", contactEmail: "N/A" },
-        { name: "Preferred Networks", location: "Chiyoda, Tokyo", website: "https://www.pfn.jp/", focus: "Deep learning for robotics, manufacturing, and IoT integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.pfn.jp/careers", contactEmail: "N/A" },
         { name: "Muse Inc.", location: "Shibuya, Tokyo", website: "https://www.museinc.co.jp/", focus: "IoT solutions, embedded systems, and smart device integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.museinc.co.jp/recruit", contactEmail: "N/A" },
         { name: "Tokyo Robotics", location: "Bunkyo, Tokyo", website: "https://robotics.tokyo/", focus: "Humanoid and service robots (Torobo for manufacturing, logistics)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://robotics.tokyo/recruit/", contactEmail: "N/A" },
         { name: "Ascent Robotics", location: "Shibuya, Tokyo", website: "https://ascent.ai/", focus: "AI-driven robotics for industrial and autonomous mobility solutions", funding: "N/A", englishFriendly: "N/A", careerPage: "https://ascent.ai/careers/", contactEmail: "N/A" },
         { name: "QBIT Robotics", location: "Minato, Tokyo", website: "https://www.qbit-robotics.co.jp/", focus: "Service robotics for restaurants and retail (telepresence robots)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.qbit-robotics.co.jp/recruit/", contactEmail: "N/A" },
         { name: "Yukai Engineering", location: "Taito, Tokyo", website: "https://www.yukai.co.jp/", focus: "Consumer robotics and IoT (BOCCO communication robot)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.yukai.co.jp/recruit", contactEmail: "N/A" },
         { name: "Life Robotics", location: "Tokyo", website: "https://www.fanuc.co.jp/", focus: "Collaborative robot arms (Acquired by FANUC)", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.fanuc.co.jp/ja/recruit/index.html", contactEmail: "N/A" },
-        { name: "SEQSENSE", location: "Chuo, Tokyo", website: "https://www.seqsense.com/", focus: "Autonomous mobile robots for security and facility management", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.seqsense.com/recruit/", contactEmail: "N/A" },
         { name: "Aba", location: "Osaka, Osaka", website: "https://aba-lab.com/", focus: "Robotics for nursing care and assistive technologies", funding: "N/A", englishFriendly: "N/A", careerPage: "https://aba-lab.com/recruit", contactEmail: "N/A" },
         { name: "GramEye", location: "Osaka, Osaka", website: "https://grameye.com/", focus: "AI and robotics for visual inspection in manufacturing", funding: "N/A", englishFriendly: "N/A", careerPage: "https://grameye.com/recruit", contactEmail: "N/A" },
         { name: "NIT Consultant", location: "Osaka, Osaka", website: "N/A", focus: "Robotics consulting and system integration for industrial applications", funding: "N/A", englishFriendly: "N/A", careerPage: "N/A", contactEmail: "N/A" },
@@ -824,7 +864,6 @@
         { name: "Nextage", location: "Kobe, Hyogo", website: "https://www.nextage.co.jp/", focus: "IoT and embedded systems for smart manufacturing and robotics integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.nextage.co.jp/recruit/", contactEmail: "N/A" },
         { name: "I-PEX (Dai-Ichi Seiko)", location: "Kyoto, Kyoto", website: "https://www.i-pex.com/", focus: "Connectors and sensors for robotics and embedded systems", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.i-pex.com/careers", contactEmail: "N/A" },
         { name: "Keigan", location: "Kyoto, Kyoto", website: "https://www.keigan.co.jp/", focus: "Robotics for human-assistive applications and IoT integration", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.keigan.co.jp/recruit", contactEmail: "N/A" },
-        { name: "Cyberdyne Inc.", location: "Tsukuba, Ibaraki", website: "https://www.cyberdyne.jp/", focus: "Wearable robotics (HAL exoskeletons) for medical and industrial use", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.cyberdyne.jp/recruit/", contactEmail: "N/A" },
         { name: "Ibaraki University Labs", location: "Ibaraki", website: "https://www.ibaraki.ac.jp/", focus: "Bio-mimetic and robotics mechatronics labs", funding: "N/A", englishFriendly: "N/A", careerPage: "https://www.ibaraki.ac.jp/en/employ/", contactEmail: "N/A" },
         { name: "Tsukuba Robotics", location: "Tsukuba, Ibaraki", website: "N/A", focus: "General term for robotics startups in Tsukuba Science City", funding: "N/A", englishFriendly: "N/A", careerPage: "N/A", contactEmail: "N/A" }
     ];
@@ -995,7 +1034,7 @@
     // ============ UTILITY FUNCTIONS ============
     function escapeHTML(str) {
         if (!str) return '';
-        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     }
 
@@ -1013,6 +1052,12 @@
         if (type.toLowerCase().includes('public')) return 'public';
         if (type.toLowerCase().includes('private')) return 'private';
         return '';
+    }
+
+    // Renders a comma separated role list as small tags
+    function renderRoleTags(roles) {
+        if (!roles) return '<span style="color:var(--text-muted)">—</span>';
+        return roles.split(',').map(r => `<span class="role-tag">${escapeHTML(r.trim())}</span>`).join('');
     }
 
     // ============ RENDER FUNCTIONS ============
@@ -1069,13 +1114,14 @@
             html += `
                 <tr>
                     <td><strong>${escapeHTML(c.name)}</strong></td>
-                    <td>${escapeHTML(c.location)}</td>
+                    <td style="min-width:150px;">${escapeHTML(c.location)}</td>
                     <td>${c.website && c.website !== 'N/A' ? `<a class="link-btn" href="${escapeHTML(c.website)}" target="_blank" rel="noopener">🌐 Website</a>` : 'N/A'}</td>
-                    <td style="min-width:200px;">${escapeHTML(c.focus)}</td>
+                    <td style="min-width:180px;">${escapeHTML(c.focus)}</td>
+                    <td style="min-width:280px;">${renderRoleTags(c.keyRoles)}</td>
                     <td>${escapeHTML(c.funding)}</td>
-                    <td>${escapeHTML(c.englishFriendly)}</td>
+                    <td style="min-width:130px;">${escapeHTML(c.englishFriendly)}</td>
                     <td>${c.careerPage && c.careerPage !== 'N/A' ? `<a class="link-btn" href="${escapeHTML(c.careerPage)}" target="_blank" rel="noopener">💼 Careers</a>` : 'N/A'}</td>
-                    <td>${escapeHTML(c.contactEmail)}</td>
+                    <td style="min-width:160px;">${escapeHTML(c.contactEmail)}</td>
                 </tr>
             `;
         });
@@ -1182,11 +1228,14 @@
         let filtered = companiesData.filter(c => {
             if (search) {
                 const s = search.toLowerCase();
-                const searchable = [c.name, c.location, c.focus, c.funding, c.englishFriendly, c.contactEmail].join(' ').toLowerCase();
+                const searchable = [
+                    c.name, c.location, c.focus, c.keyRoles, c.funding,
+                    c.englishFriendly, c.contactEmail, c.careerPage
+                ].filter(Boolean).join(' ').toLowerCase();
                 if (!searchable.includes(s)) return false;
             }
             if (englishFilter) {
-                if (c.englishFriendly.toLowerCase().includes(englishFilter.toLowerCase()) === false) return false;
+                if ((c.englishFriendly || '').toLowerCase().includes(englishFilter.toLowerCase()) === false) return false;
             }
             return true;
         });
